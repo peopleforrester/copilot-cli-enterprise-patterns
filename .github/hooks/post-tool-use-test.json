@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "hooks": {
+    "postToolUse": [
+      {
+        "matcher": {
+          "tool": ["Edit", "Write", "MultiEdit"]
+        },
+        "command": "scripts/copilot-hooks/run-tests.sh",
+        "description": "Run the test suite (fast tier) after any file modification. Surface failures back to the agent.",
+        "blocking": true,
+        "timeoutMs": 180000
+      }
+    ]
+  }
+}

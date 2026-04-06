@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "hooks": {
+    "preToolUse": [
+      {
+        "matcher": {
+          "tool": ["Edit", "Write", "MultiEdit"]
+        },
+        "command": "scripts/copilot-hooks/lint-changed.sh",
+        "description": "Lint files about to be modified. Block the edit if linting fails.",
+        "blocking": true,
+        "timeoutMs": 30000
+      }
+    ]
+  }
+}

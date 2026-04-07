@@ -16,6 +16,7 @@
 - `patterns/externalization-patterns.md`
 - `reference/agents-md-template.md`
 - All three Skill examples in `.github/skills/`
+- `reference/custom-agents.md` (for when a Skill isn't the right shape)
 
 ## The principle
 
@@ -27,6 +28,7 @@ If you tell the agent the same thing twice, it belongs in a file. If the rule mu
 - [ ] You've written a Skill that the agent triggers correctly on the first try
 - [ ] Your `AGENTS.md` is under 500 lines and has nothing duplicated from the linter
 - [ ] You can explain when memory is the wrong tool
+- [ ] You can explain when a custom `.agent.md` is the right shape vs a Skill (persona+tool-scope vs procedure)
 
 ## Next
 

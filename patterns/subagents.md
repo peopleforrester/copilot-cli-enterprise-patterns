@@ -9,7 +9,12 @@ Subagents run in their own context windows. Their output returns to the main ses
 | **Explore** | Broad codebase searches, "find every place X is referenced", repo-wide questions | Slower than direct grep; worth it when results would be large |
 | **Plan** | Drafting an implementation plan without writing it into main context | The main session sees only the final plan, not the exploration |
 | **Code Review** | Auditing a diff against project standards | Cannot make changes — produces findings only |
+| **Critic** | Second-opinion review of a plan before you execute it, run on a *complementary model* (e.g., GPT-5 if your primary is Sonnet) | Only as useful as the plan you hand it — vague plans get vague criticism |
 | **Generic Task** | One-shot research, computation, or focused subtask | You phrase the brief; brief quality determines result quality |
+
+> **Critic** (v1.0.18+) is worth calling out separately. It's designed to be run against a different model family than the one doing the work — the point is *diversity of failure modes*. If Sonnet wrote the plan, Critic on GPT-5 will catch blind spots Sonnet shares with itself. Use it before any irreversible or high-blast-radius change.
+
+Custom agents beyond these five live in `.agent.md` files — see `reference/custom-agents.md`.
 
 ## When to use which
 

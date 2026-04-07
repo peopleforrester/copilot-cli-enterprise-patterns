@@ -1,0 +1,50 @@
+# ABOUTME: CI for the course repo. Validates markdown, JSON, and links.
+# ABOUTME: Dogfoods Pillar 4 — the repo enforces what it teaches.
+
+name: ci
+
+on:
+  push:
+    branches: [staging, main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install markdownlint-cli
+        run: npm install -g markdownlint-cli@0.41.0
+
+      - name: Lint markdown
+        run: markdownlint '**/*.md' --ignore node_modules --ignore labs/lab-03-externalization/inherited-AGENTS.md
+
+      - name: Validate JSON files
+        run: |
+          set -e
+          fail=0
+          while IFS= read -r f; do
+            if ! jq empty "$f" >/dev/null 2>&1; then
+              echo "::error file=$f::invalid JSON"
+              fail=1
+            fi
+          done < <(find . -name '*.json' -not -path './node_modules/*')
+          exit $fail
+
+      - name: Check shell scripts
+        run: |
+          sudo apt-get update && sudo apt-get install -y shellcheck
+          find scripts -name '*.sh' -exec shellcheck {} +
+
+      - name: Link check
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: --no-progress --exclude-mail './**/*.md'
+          fail: true

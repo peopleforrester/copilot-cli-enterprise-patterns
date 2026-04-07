@@ -84,7 +84,7 @@ The honest answer in `enterprise/copilot-vs-claude-code.md`. Short version:
 
 - **Copilot CLI** — already in your GitHub bill, GitHub MCP built in, works with org SSO out of the box
 - **Claude Code** — separate vendor relationship, sometimes ahead on Anthropic-specific features
-- Both run Claude Sonnet 4.6 by default. The mental model is identical.
+- Both run Claude Sonnet (4.5 default in Copilot CLI) by default. The mental model is identical.
 
 ---
 

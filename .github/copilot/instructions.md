@@ -1,6 +1,6 @@
 # Copilot CLI — User-level Custom Instructions
 
-These instructions apply to **every** Copilot CLI session for this user, across all repositories. Project-specific rules belong in each repo's `AGENTS.md`.
+> Install to `~/.copilot/copilot-instructions.md`. These instructions apply to **every** Copilot CLI session for this user, across all repositories. Project-specific rules belong in each repo's `AGENTS.md`.
 
 ## Tone
 

@@ -15,8 +15,8 @@ Your job is to wire up Pillar 4 from scratch.
 
 ## Your task
 
-1. Add a `PreToolUse` lint hook for Python files using ruff.
-2. Add a `PostToolUse` test hook running pytest.
+1. Add a `preToolUse` lint hook for Python files using ruff (blocks via `{"deny": true}` on lint failure).
+2. Add a `postToolUse` test hook running pytest (cannot block, but its output is surfaced to the agent).
 3. Add an `AGENTS.md` advising the agent to fix failing tests before declaring done.
 4. Ask Copilot CLI to "make the tests pass".
 5. Watch the loop run autonomously: agent edits → hook lints → hook tests → on failure, agent fixes → loop.
@@ -37,7 +37,7 @@ A minimal `calculator.py` with `add`, `subtract`, `multiply`, `divide`. The bug:
 
 ## Success criteria
 
-- [ ] The hooks are JSON-valid and `blocking: true`
+- [ ] The hooks are JSON-valid; the `preToolUse` script returns `{"deny": true}` on failure (not just non-zero exit)
 - [ ] The agent fixes the bug in `calculator.py`
 - [ ] You did not need to manually re-run pytest — the hook did it
 - [ ] Final pytest output is pristine (no warnings)
@@ -46,5 +46,5 @@ A minimal `calculator.py` with `add`, `subtract`, `multiply`, `divide`. The bug:
 ## Debrief questions
 
 - How many edit-test cycles did the agent need?
-- What would have happened without the `PostToolUse` hook?
+- What would have happened without the `postToolUse` hook?
 - What's one rule you currently put in `AGENTS.md` in your real projects that should be a hook instead?

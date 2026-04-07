@@ -7,9 +7,14 @@ Model Context Protocol servers extend Copilot CLI with new tools. The GitHub MCP
 ## Built in (no install required)
 
 ### GitHub MCP
-Native access to issues, pull requests, branches, releases, and the API. Works with both GHEC and GHES (point it at your enterprise host).
+Native access to repositories, issues, pull requests, branches, releases, and workflow runs. Works with both GHEC and GHES (point it at your enterprise host).
 
 **Use it for:** "show me open PRs", "create an issue from this bug", "what commits landed on staging this week".
+
+**Toggle:**
+- `--enable-all-github-mcp-tools` — full toolset
+- `--disable-mcp-server github` — disable
+- `--disable-builtin-mcps` — disable all built-ins
 
 ## Recommended additions
 
@@ -33,46 +38,96 @@ Pulls error reports, stack traces, and frequency data into the session.
 **When to add:** when "fix this bug" means "the user is going to paste a Sentry link".
 
 ### Linear MCP (or Jira, Asana, etc.)
-Issue tracker integration. Lets the agent open, comment on, and close tickets in your tracker.
-
-**When to add:** when developers spend more time copy-pasting between Linear and the editor than coding.
+Issue tracker integration.
 
 **Caveats:** scope the API token. The agent should not be able to delete projects.
 
 ### Internal docs MCP
-Custom MCP pointing at your internal docs site (Confluence, Notion, internal wiki). Lets the agent search company-specific knowledge instead of inventing it.
+Custom MCP pointing at your internal docs site.
 
-**When to add:** as soon as you have enough internal docs that the agent's hallucinations about your conventions become a problem.
+**Caveats:** access control matters — the MCP inherits the perms of whatever token it's given.
 
-**Caveats:** access control matters. The MCP inherits the perms of whatever token it's given.
+### Playwright MCP
+Browser automation. Useful for end-to-end test authoring and scraping local dev servers.
 
-## Not recommended (yet)
+## Not recommended (yet, as of April 2026)
 
-These exist but the trade-off isn't there for most teams as of April 2026:
+- General web-browsing MCPs — too broad, too easy to lose context
+- Email MCPs — high blast radius, low hit rate for engineering work
+- "Universal" enterprise hub MCPs — single token, broad scope, large attack surface
 
-- **General web-browsing MCPs** — too broad, too easy to lose context to noise. Use targeted fetch instead.
-- **Email MCPs** — high blast radius, low hit rate for engineering work.
-- **"Universal" enterprise hub MCPs** — single token, broad scope, large attack surface. Prefer narrow MCPs.
+## Configuration file
 
-## Installing an MCP
-
-Copilot CLI reads MCP config from `~/.config/copilot/mcp.json`:
+Copilot CLI reads MCP config from **`~/.copilot/mcp-config.json`** (user-level). Optional repo-level at `.copilot/mcp-config.json`.
 
 ```json
 {
   "mcpServers": {
-    "postgres": {
-      "command": "mcp-server-postgres",
-      "args": ["--connection-string", "postgresql://readonly@db.dev.corp/app"],
-      "env": {}
+    "playwright": {
+      "type": "local",
+      "command": "npx",
+      "args": ["@playwright/mcp@latest"],
+      "env": {},
+      "tools": ["*"]
+    },
+    "remote-api": {
+      "type": "http",
+      "url": "https://mcp.example.com/mcp",
+      "headers": { "Authorization": "Bearer ${API_KEY}" },
+      "tools": ["*"]
     }
   }
 }
 ```
 
-Restart the CLI session for new MCPs to take effect. Confirm with `/mcp` or by asking "what tools do you have available?".
+### Transport types
 
-## Audit checklist before adopting an MCP
+| Type | Description |
+|---|---|
+| `local` / `stdio` | Stdin/stdout child process |
+| `http` | Streamable HTTP |
+| `sse` | Server-Sent Events (legacy, deprecated but still supported) |
+
+### Per-session override
+
+```bash
+copilot --additional-mcp-config /path/to/extra.json
+```
+
+## Management commands
+
+| Command | Action |
+|---|---|
+| `/mcp add` | Interactive form to add an MCP |
+| `/mcp show` | List configured MCPs and current state |
+| `/mcp edit <server>` | Edit an existing entry |
+| `/mcp delete <server>` | Remove |
+| `/mcp enable\|disable <server>` | Toggle without removing |
+
+## Tool-level access control
+
+```bash
+copilot --allow-tool='MyMCP(specific_tool)'
+copilot --deny-tool='MyMCP(dangerous_tool)'
+```
+
+`deny` always wins, even with `--allow-all`.
+
+## Restart matters
+
+**MCPs load at session start.** Adding or modifying an MCP requires restarting the CLI for changes to take effect. The error message when you forget is unhelpful — see `docs/gotchas-copilot-cli.md`.
+
+## Org policy gap (track this)
+
+As of April 2026, **organisation-level MCP policies do not currently apply to Copilot CLI** — confirmed gap. Server-side MCP allowlists administered through the admin console affect IDE Copilot but not the CLI yet. If your org requires MCP control on the CLI, enforce it through:
+
+- The user-level `~/.copilot/mcp-config.json` shipped via your standard onboarding
+- A `preToolUse` hook that denies calls to non-allowlisted MCPs
+- A wrapper script that launches `copilot` with `--deny-tool` flags
+
+Track the gap closing in the GitHub changelog.
+
+## Audit checklist before adopting any MCP
 
 1. Who maintains it? Vendor, community, your own team?
 2. What's the last commit date?

@@ -8,7 +8,7 @@
 
 - Why hooks are categorically different from instructions
 - The hierarchy of verification (claim → diff → lint → test → CI)
-- How to write `PreToolUse` and `PostToolUse` hooks
+- How to write `preToolUse` (blocking) and `postToolUse` (surfaced) hooks, plus the other 6 lifecycle events
 - When to use blocking vs non-blocking
 - The "pristine output" rule
 
@@ -20,11 +20,11 @@
 
 ## The principle
 
-> Advisory instructions work ~80% of the time. Deterministic verification works 100%.
+> Advisory instructions work ~80% of the time. Deterministic verification (via the right hook event) works 100%.
 
 `AGENTS.md` says "always run tests after a change." Sometimes the agent does. Sometimes it doesn't. Sometimes it says it did when it didn't.
 
-A `PostToolUse` hook running tests doesn't have moods. It runs every time, fails when it should fail, and the agent can't talk it out of failing.
+A `postToolUse` hook running tests doesn't have moods. It runs every time, surfaces failures back to the agent, and the agent has to react. (For a hard block, pair it with a `preToolUse` that refuses further edits while tests are red.)
 
 ## Exit criteria
 

@@ -16,8 +16,9 @@ In a fresh session, ask:
 > "What instruction files have you loaded for this session, and from where?"
 
 Compare its answer against:
-- `~/.config/copilot/instructions.md` (user-level)
-- `<repo>/AGENTS.md` (project-level)
+- `~/.copilot/copilot-instructions.md` (user-level)
+- `<repo>/AGENTS.md` (project-level, plain markdown, nearest-wins tree walk)
+- `<repo>/.github/copilot-instructions.md` (also loaded)
 
 **Checkpoint:** you can locate both files on disk and explain which takes precedence when they conflict.
 

@@ -10,7 +10,7 @@ This repo is not a tutorial. It is a working set of configs, hooks, skills, and 
 
 A practitioner reference for teams adopting Copilot CLI under real enterprise constraints: GitHub Enterprise (Cloud or Server), restricted internet, security review requirements, and deterministic verification needs.
 
-Copilot CLI runs **Claude Sonnet** by default — the same Anthropic model that powers Claude Code. You can switch to Opus 4.6, GPT-5.3-Codex, or Gemini 3 Pro via `/model`. The mental model, commands, and externalization patterns map directly across agentic CLIs, which is why these patterns transfer.
+Copilot CLI runs **Claude Sonnet 4.5** by default — the same Anthropic model family that powers Claude Code. You can switch to Sonnet 4.6, Opus 4.6, Haiku 4.5, GPT-5.x, Gemini 3 Pro/Flash, or free models (GPT-5 mini, GPT-4.1, GPT-4o) via `/model`. The mental model, commands, and externalization patterns map directly across agentic CLIs, which is why these patterns transfer.
 
 ---
 
@@ -21,7 +21,7 @@ Copilot CLI runs **Claude Sonnet** by default — the same Anthropic model that 
 | 1. Manage Context | Keep the working window relevant | Auto-compaction at 95%, `/clear`, `/usage`, subagents (Explore, Plan, Code Review) |
 | 2. Plan Before Code | Decide the approach before writing | `Shift+Tab` plan mode, `/plan` command, review-then-execute |
 | 3. Externalize Decisions | Move standards out of prompts | `AGENTS.md`, `.github/copilot/instructions.md`, Skills (`SKILL.md`), repository memory |
-| 4. Verify Output | Trust deterministic checks, not vibes | `PreToolUse` / `PostToolUse` hooks, `/diff`, built-in Code Review agent |
+| 4. Verify Output | Trust deterministic checks, not vibes | `preToolUse` (only blocking event) / `postToolUse` hooks, `/diff`, Code Review + Critic subagents |
 
 > Advisory instructions work ~80% of the time. Deterministic verification works 100%.
 
@@ -34,19 +34,18 @@ git clone git@github.com:peopleforrester/copilot-cli-enterprise-patterns.git
 cd copilot-cli-enterprise-patterns
 
 # Apply user-level Copilot config
-mkdir -p ~/.config/copilot
-cp .github/copilot/instructions.md ~/.config/copilot/instructions.md
-cp .github/copilot/settings.json   ~/.config/copilot/settings.json
+mkdir -p ~/.copilot ~/.copilot/hooks ~/.copilot/skills
+cp .github/copilot/instructions.md ~/.copilot/copilot-instructions.md
+cp .github/copilot/settings.json   ~/.copilot/config.json
 
 # Project-level instructions stay in the repo
 # AGENTS.md is auto-loaded by Copilot CLI on session start
 
 # Hooks
-cp .github/hooks/*.json ~/.config/copilot/hooks/
+cp .github/hooks/*.json ~/.copilot/hooks/
 
 # Skills (per-user)
-mkdir -p ~/.config/copilot/skills
-cp -r .github/skills/* ~/.config/copilot/skills/
+cp -r .github/skills/* ~/.copilot/skills/
 ```
 
 Then launch Copilot CLI in any repo and the patterns are active.

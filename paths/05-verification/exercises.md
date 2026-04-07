@@ -14,7 +14,7 @@ Then open `scripts/copilot-hooks/lint-changed.sh` and `run-tests.sh`. Trace what
 
 ## Exercise 5.2 — Write a security gate hook (20 min)
 
-Write a `PreToolUse` hook that blocks any `Edit` or `Write` to paths matching `infra/**`. Drop it in `.github/hooks/block-infra.json`.
+Write a `preToolUse` hook that denies any `edit` or `write` tool call targeting paths under `infra/**`. Block via `{"deny": true, "reason": "..."}` on stdout (not exit code). Drop it in `.github/hooks/block-infra.json`.
 
 Test it:
 1. Ask the agent: "Add a comment to `infra/main.tf` explaining the VPC CIDR."
@@ -25,7 +25,7 @@ Test it:
 
 ## Exercise 5.3 — Write a test enforcement hook (20 min)
 
-Write a `PostToolUse` hook that runs `pytest -q` (or your project's equivalent) after any `.py` file is edited. Make it blocking with a 2-minute timeout.
+Write a `postToolUse` hook that runs `pytest -q` (or your project's equivalent) after any `.py` file is edited. Set `timeoutSec: 120`. (Note: `postToolUse` cannot literally block; the agent receives the output and reacts. For a hard block on red tests, also add a `preToolUse` hook that checks the last test result and denies further edits if it's red.)
 
 Then deliberately introduce a failing test. Ask the agent to make any small edit. Watch the hook fail and the agent receive the failure.
 

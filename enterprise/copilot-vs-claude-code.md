@@ -4,7 +4,7 @@ You will be asked this question. Here is the honest answer.
 
 ## Both run the same model by default
 
-Both Copilot CLI and Claude Code default to **Claude Sonnet 4.6**. The mental model — the Four Pillars, plan mode, Skills, hooks, MCPs — is identical. Most of what you learn in one transfers to the other.
+Both Copilot CLI and Claude Code default to a **Claude Sonnet** model (Sonnet 4.5 in Copilot CLI as of April 2026; both 4.5 and 4.6 are 1×). The mental model — the Four Pillars, plan mode, Skills, hooks, MCPs — is identical. Most of what you learn in one transfers to the other.
 
 The differences are about **packaging, contracting, and integration**, not model quality.
 
@@ -28,7 +28,7 @@ The differences are about **packaging, contracting, and integration**, not model
 
 - Plan mode (`Shift+Tab` in both)
 - Skills format (`SKILL.md` works in both)
-- Hook concepts (`PreToolUse` / `PostToolUse` in both, with format differences)
+- Hook concepts (lifecycle events in both, with format differences — Copilot CLI uses `preToolUse` / `postToolUse` and 6 more, blocking via `{"deny": true}` on stdout)
 - Subagents
 - MCP support
 - Model quality on Sonnet (it is literally the same model)

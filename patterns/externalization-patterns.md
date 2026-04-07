@@ -7,14 +7,18 @@ If you give the agent the same instruction twice, it belongs in a file. If the r
 | Mechanism | Path | Scope | Enforcement |
 |---|---|---|---|
 | Project instructions | `AGENTS.md` | One repo, every session | Advisory |
-| User instructions | `~/.config/copilot/instructions.md` | All repos, one user | Advisory |
-| Skill | `.github/skills/<name>/SKILL.md` (project) or `~/.config/copilot/skills/<name>/SKILL.md` (user) | Triggered on description match | Advisory, structured |
-| Memory | Repository memory store | Across sessions in same repo | Advisory |
-| Hook | `.github/hooks/*.json` (project) or `~/.config/copilot/hooks/*.json` (user) | Matching tool calls | **Deterministic** |
+| User instructions | `~/.copilot/copilot-instructions.md` | All repos, one user | Advisory |
+| Skill | `.github/skills/<name>/SKILL.md` (project) or `~/.copilot/skills/<name>/SKILL.md` (user) | Triggered on description match | Advisory, structured |
+| Memory | Repository memory (Pro/Pro+ public preview) | Across sessions in same repo | Advisory |
+| Hook | `.github/hooks/*.json` (project) or `~/.copilot/hooks/*.json` (user) | Matching tool calls | **Deterministic** |
 
 ## How to choose
 
-**Use `AGENTS.md`** for rules that are project-specific and apply broadly: language version, test framework, branch workflow, security boundaries.
+**Use `AGENTS.md`** for rules that are project-specific and apply broadly: language version, test framework, branch workflow, security boundaries. Plain markdown, no frontmatter; nearest-wins tree walk lets you place per-package overrides in subdirectories.
+
+**Use `.github/copilot-instructions.md`** when you want the same instructions to apply to Copilot CLI *and* Copilot Chat / IDE code review.
+
+**Use `.github/instructions/**/*.instructions.md` with `applyTo` glob frontmatter** when a rule should only load for files matching a pattern (e.g., `applyTo: "src/api/**/*.ts"`).
 
 **Use user instructions** for personal preferences that follow you between repos: tone, response style, default behaviors.
 

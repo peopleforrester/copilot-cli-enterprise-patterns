@@ -15,9 +15,10 @@ The mental model before the keystrokes.
 ## What Copilot CLI is
 
 - An **agentic** CLI: plans, acts, observes, adapts
-- Default model: **Claude Sonnet 4.6** (same Anthropic model as Claude Code)
-- Switch via `/model` to Opus 4.6, GPT-5.3-Codex, Gemini 3 Pro
+- Default model: **Claude Sonnet 4.5** (same Anthropic family as Claude Code)
+- Switch via `/model` to Sonnet 4.6, Opus 4.6, Haiku 4.5, GPT-5.x, Gemini 3 Pro/Flash, free tier
 - Built-in GitHub MCP — issues, PRs, branches as native tools
+- Three modes (Standard / Plan / Autopilot) cycled with `Shift+Tab`
 
 <!-- Stress: agentic, not autocomplete. The mental model matters more than the syntax. -->
 
@@ -89,7 +90,7 @@ If you tell it twice, write it down.
 
 > Advisory works ~80%. Deterministic works 100%.
 
-- `PreToolUse` / `PostToolUse` hooks
+- `preToolUse` (only blocking event) / `postToolUse` hooks
 - `/diff` before commit
 - Code Review subagent
 - Pristine test output

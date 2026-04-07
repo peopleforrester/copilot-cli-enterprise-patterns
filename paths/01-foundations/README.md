@@ -7,7 +7,7 @@
 
 - What Copilot CLI is and isn't
 - The Four Pillars and why they exist
-- The default model (Sonnet 4.6) and when to switch
+- The default model (Sonnet 4.5) and when to switch
 - The mental model: agentic CLI as collaborator, not autocomplete
 
 ## Why it matters
@@ -29,7 +29,7 @@ You can do these without looking anything up:
 - [ ] Open Copilot CLI and explain to a colleague what model is running
 - [ ] Toggle Plan Mode and describe what changes
 - [ ] Run `/clear` and explain *when* you'd use it vs. continuing
-- [ ] Locate `AGENTS.md` and `.github/copilot/instructions.md` and explain which loads when
+- [ ] Locate `AGENTS.md`, `.github/copilot-instructions.md`, and `~/.copilot/copilot-instructions.md` and explain which loads when
 - [ ] State the Four Pillars from memory
 
 ## Next

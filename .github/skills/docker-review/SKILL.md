@@ -1,6 +1,9 @@
 ---
 name: docker-review
 description: Review a Dockerfile against an enterprise best-practice checklist and report concrete issues with line references.
+license: MIT
+user-invocable: true
+disable-model-invocation: false
 ---
 
 # docker-review

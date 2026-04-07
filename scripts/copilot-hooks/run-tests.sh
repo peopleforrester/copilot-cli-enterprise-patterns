@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
-# ABOUTME: PostToolUse hook script — run the fast test tier after a file edit.
-# ABOUTME: Auto-detects the project's test runner. Exits non-zero on any failure.
+# ABOUTME: postToolUse hook script — run the fast test tier after a file edit.
+# ABOUTME: postToolUse cannot block; failures are surfaced to the agent for autonomous fix.
 
-set -euo pipefail
+set -uo pipefail
 
-# Hard cap to keep the agent loop snappy.
+# Drain stdin (Copilot CLI delivers a JSON event we don't currently need).
+cat >/dev/null || true
+
 TIMEOUT="${COPILOT_HOOK_TEST_TIMEOUT:-180}"
 
 run_with_timeout() {
@@ -48,5 +50,4 @@ if [[ -f go.mod ]] && command -v go >/dev/null 2>&1; then
 fi
 
 # No recognised test setup — succeed silently so the hook is a no-op.
-echo "run-tests: no test runner detected, skipping" >&2
 exit 0

@@ -1,6 +1,9 @@
 ---
 name: api-scaffold
 description: Scaffold a REST API endpoint with input validation, structured error handling, and a passing test before any business logic is written.
+license: MIT
+user-invocable: true
+disable-model-invocation: false
 ---
 
 # api-scaffold

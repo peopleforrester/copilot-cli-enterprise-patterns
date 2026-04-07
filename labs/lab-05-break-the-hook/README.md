@@ -15,7 +15,7 @@ Start from the same `sample-app/` as Lab 04 (or copy it). Make sure pytest is cu
 
 ## Part 1 — Advisory only
 
-1. Delete the `PostToolUse` test hook (or set `blocking: false`).
+1. Delete the `postToolUse` test hook (or change it to a `sessionStart` prompt that just asks the agent nicely to run tests).
 2. Add to `AGENTS.md`:
    > "ALWAYS run pytest after every code change. Do NOT declare a task done if any test fails. This is critical."
 3. Save.
@@ -29,7 +29,7 @@ Note in your debrief how many times the agent followed the rule vs ignored it.
 
 ## Part 2 — Deterministic
 
-1. Restore the `PostToolUse` test hook with `blocking: true`.
+1. Restore the `postToolUse` test hook so its output is surfaced to the agent on failure. (Note: `postToolUse` cannot literally block — the deterministic gate here is that the agent now receives the failure and is forced to react. For a *true* block, you'd put the same check in a `preToolUse` hook on the next edit attempt and emit `{"deny": true}` if previous tests are red.)
 2. Same broken `add`.
 3. Same docstring request.
 4. Watch what happens.

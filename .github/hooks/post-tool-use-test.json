@@ -3,13 +3,12 @@
   "hooks": {
     "postToolUse": [
       {
-        "matcher": {
-          "tool": ["Edit", "Write", "MultiEdit"]
-        },
-        "command": "scripts/copilot-hooks/run-tests.sh",
-        "description": "Run the test suite (fast tier) after any file modification. Surface failures back to the agent.",
-        "blocking": true,
-        "timeoutMs": 180000
+        "type": "command",
+        "bash": "./scripts/copilot-hooks/run-tests.sh",
+        "powershell": "./scripts/copilot-hooks/run-tests.ps1",
+        "cwd": ".",
+        "timeoutSec": 180,
+        "comment": "Run the fast test tier after any file modification. postToolUse cannot block, but failures are surfaced to the agent which then fixes them."
       }
     ]
   }

@@ -3,13 +3,12 @@
   "hooks": {
     "preToolUse": [
       {
-        "matcher": {
-          "tool": ["Edit", "Write", "MultiEdit"]
-        },
-        "command": "scripts/copilot-hooks/lint-changed.sh",
-        "description": "Lint files about to be modified. Block the edit if linting fails.",
-        "blocking": true,
-        "timeoutMs": 30000
+        "type": "command",
+        "bash": "./scripts/copilot-hooks/lint-changed.sh",
+        "powershell": "./scripts/copilot-hooks/lint-changed.ps1",
+        "cwd": ".",
+        "timeoutSec": 30,
+        "comment": "Lint files about to be edited. Returns {\"deny\": true} on lint failure to block the edit."
       }
     ]
   }

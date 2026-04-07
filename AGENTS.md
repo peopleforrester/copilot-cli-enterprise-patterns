@@ -38,7 +38,7 @@ If a task requires changes in any of the above, **stop and ask**.
 3. For any new public function, a test must exist before the function is considered complete (TDD).
 4. Run `/diff` and review the full session diff before committing.
 
-The `PreToolUse` and `PostToolUse` hooks in `.github/hooks/` enforce steps 1 and 2 automatically. Do not bypass them.
+The `preToolUse` and `postToolUse` hooks in `.github/hooks/` enforce steps 1 and 2 automatically. Do not bypass them.
 
 ## Workflow expectations
 

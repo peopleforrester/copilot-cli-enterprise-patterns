@@ -22,26 +22,28 @@ Aim for level 4 locally. Gate merges at level 5.
 
 ---
 
-## PreToolUse hooks
+## preToolUse hooks (the only blocking event)
 
-Run *before* a tool executes. Block the operation on non-zero exit.
+Run *before* a tool executes. Block by emitting `{"deny": true, "reason": "..."}` on **stdout** — not by exit code (non-zero exits are logged-and-skipped).
 
 Use for:
-- Lint files about to be edited
-- Block edits to protected paths
-- Block dangerous shell patterns
+- Lint files about to be edited and deny on failure
+- Deny edits to protected paths
+- Deny dangerous shell patterns
 - Require a spec to exist before allowing edits
 
 ---
 
-## PostToolUse hooks
+## postToolUse hooks
 
-Run *after* a tool executes. Failures bounce back to the agent.
+Run *after* a tool executes. Cannot block — but their output is surfaced back to the agent, which then reacts.
 
 Use for:
 - Run tests after any source edit
 - Run security scanner on dependency changes
 - Validate JSON/YAML files were written correctly
+
+Plus 6 more event types: `sessionStart`, `sessionEnd`, `userPromptSubmitted`, `agentStop`, `subagentStop`, `errorOccurred`. None of them block.
 
 ---
 
@@ -49,8 +51,8 @@ Use for:
 
 Every repo using Copilot CLI should have:
 
-1. `PreToolUse` lint hook
-2. `PostToolUse` test hook (fast tier)
+1. `preToolUse` lint hook (blocks via `{"deny": true}`)
+2. `postToolUse` test hook (fast tier; non-blocking but surfaced)
 3. `permissions.deny` for destructive shell + secrets
 4. CI gating merges to `main`
 

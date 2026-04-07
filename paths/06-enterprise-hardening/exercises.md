@@ -23,7 +23,7 @@ Draft it. Use `enterprise/restricted-environment.md` and `enterprise/security-de
 ## Exercise 6.3 — Onboard a fictional new developer (15 min)
 
 Write a single shell script that:
-1. Copies user-level instructions and settings to `~/.config/copilot/`
+1. Copies user-level instructions and settings to `~/.copilot/` (or `$COPILOT_HOME` if set)
 2. Copies user-level Skills
 3. Verifies `gh auth status` is authenticated against your GHE host
 4. Prints next-step instructions

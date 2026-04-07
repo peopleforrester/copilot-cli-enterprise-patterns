@@ -1,12 +1,37 @@
 #!/usr/bin/env bash
-# ABOUTME: PreToolUse hook script — lint files about to be edited.
-# ABOUTME: Reads the target path from $COPILOT_HOOK_FILE_PATH and dispatches to the right linter.
+# ABOUTME: preToolUse hook script — lint files about to be edited.
+# ABOUTME: Reads JSON from stdin (toolName, toolArgs, cwd) and emits {"deny": true} on lint failure.
 
-set -euo pipefail
+set -uo pipefail
 
-FILE="${COPILOT_HOOK_FILE_PATH:-${1:-}}"
-if [[ -z "$FILE" ]]; then
-  echo "lint-changed: no file path provided" >&2
+# Copilot CLI delivers a JSON event on stdin. Parse out the file path from toolArgs.
+INPUT="$(cat || true)"
+
+extract_path() {
+  if command -v jq >/dev/null 2>&1; then
+    printf '%s' "$INPUT" | jq -r '
+      .toolArgs.path
+      // .toolArgs.file_path
+      // .toolArgs.filePath
+      // .toolArgs.filename
+      // empty
+    '
+  else
+    # Fallback: best-effort grep for a "path" field.
+    printf '%s' "$INPUT" | grep -oE '"(path|file_path|filePath)"[[:space:]]*:[[:space:]]*"[^"]+"' \
+      | head -n1 | sed -E 's/.*"([^"]+)"$/\1/'
+  fi
+}
+
+deny() {
+  local reason="$1"
+  printf '{"deny": true, "reason": %s}\n' "$(printf '%s' "$reason" | jq -Rsa . 2>/dev/null || printf '"%s"' "$reason")"
+  exit 0
+}
+
+FILE="$(extract_path)"
+if [[ -z "${FILE:-}" ]]; then
+  # No file path in event — nothing to lint, allow.
   exit 0
 fi
 
@@ -18,35 +43,40 @@ fi
 case "$FILE" in
   *.py)
     if command -v ruff >/dev/null 2>&1; then
-      ruff check "$FILE"
-    else
-      echo "lint-changed: ruff not installed, skipping $FILE" >&2
+      if ! OUT="$(ruff check "$FILE" 2>&1)"; then
+        deny "ruff failed for $FILE: $OUT"
+      fi
     fi
     ;;
   *.ts|*.tsx|*.js|*.jsx)
     if command -v pnpm >/dev/null 2>&1 && [[ -f package.json ]]; then
-      pnpm exec eslint "$FILE"
-    elif command -v npx >/dev/null 2>&1; then
-      npx --no-install eslint "$FILE" 2>/dev/null || true
+      if ! OUT="$(pnpm exec eslint "$FILE" 2>&1)"; then
+        deny "eslint failed for $FILE: $OUT"
+      fi
     fi
     ;;
   *.sh)
     if command -v shellcheck >/dev/null 2>&1; then
-      shellcheck "$FILE"
+      if ! OUT="$(shellcheck "$FILE" 2>&1)"; then
+        deny "shellcheck failed for $FILE: $OUT"
+      fi
     fi
     ;;
   *.json)
     if command -v jq >/dev/null 2>&1; then
-      jq empty "$FILE"
+      if ! OUT="$(jq empty "$FILE" 2>&1)"; then
+        deny "invalid JSON in $FILE: $OUT"
+      fi
     fi
     ;;
   *.md)
     if command -v markdownlint >/dev/null 2>&1; then
-      markdownlint "$FILE"
+      if ! OUT="$(markdownlint "$FILE" 2>&1)"; then
+        deny "markdownlint failed for $FILE: $OUT"
+      fi
     fi
     ;;
-  *)
-    # Unknown extension — no linter, no failure.
-    exit 0
-    ;;
 esac
+
+# Empty stdout + exit 0 = approve.
+exit 0

@@ -15,8 +15,8 @@ Yes. Many teams do. Pick the one that matches your enterprise contract and stick
 
 ## Models
 
-**Q: Why is Sonnet the default?**
-~95% of Opus's coding ability at a fraction of the cost. For 90% of work, Sonnet is the right choice. Opus earns the cost on multi-file refactors, security audits, and long autonomous runs.
+**Q: Why is Sonnet 4.5 the default?**
+~95% of Opus's coding ability at a fraction of the cost. For 90% of work, Sonnet is the right choice. Sonnet 4.6 is also 1× and worth A/B-testing on your workload. Opus earns the cost on multi-file refactors, security audits, and long autonomous runs.
 
 **Q: When should I switch to GPT-5.3-Codex or Gemini 3 Pro?**
 GPT-5.3-Codex if your team prefers it for tight inner-loop JS/TS work. Gemini 3 Pro for tasks involving PDFs or screenshots. Otherwise stay on Sonnet.
@@ -54,7 +54,7 @@ Ask the agent: "Which Skill applies to this request?" If the answer is "none" or
 ## Hooks
 
 **Q: Hooks feel scary. What if they break my workflow?**
-Start with two: lint on `PreToolUse`, test on `PostToolUse`. Both `blocking: true`. That's the minimum bar. Add more only when pain reveals the gap.
+Start with two: lint on `preToolUse` (the only event that can block — emits `{"deny": true}` on stdout), test on `postToolUse` (cannot block but its output is surfaced to the agent so failures get fixed). That's the minimum bar.
 
 **Q: Can the agent disable hooks?**
 Not at runtime. A user can edit `settings.json` to remove a deny rule, but that's a deliberate human action, not the agent talking itself out of a check.
@@ -71,7 +71,7 @@ Check the current GitHub Copilot data handling docs — the answer is in Microso
 Same answer — verify against the live docs before quoting in a procurement conversation.
 
 **Q: How do I prove to security that the agent isn't reading our `.env`?**
-Show them the `permissions.deny` block in `settings.json`. The deny rules are enforced client-side; the agent cannot read denied paths. If they want belt-and-suspenders, encrypt secrets at rest with a secret manager so even if the rule were missing, the file would be useless.
+Show them the `--deny-tool` flags in your team's launch wrapper plus the `preToolUse` hook in `.github/hooks/` that denies reads of secret paths and emits `{"deny": true}`. (Note: there is no `permissions.deny` block in Copilot CLI's `settings.json` — that's a Claude Code idiom. Copilot CLI uses CLI flags + hooks + interactive grants.) Belt-and-suspenders: encrypt secrets at rest in a secret manager so even if a rule were missing, the file would be useless.
 
 ## Adoption
 

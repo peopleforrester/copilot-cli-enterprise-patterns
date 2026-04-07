@@ -1,6 +1,9 @@
 ---
 name: spec-driven-dev
 description: Drive any non-trivial change through write-spec → review-spec → implement-from-spec, instead of jumping to code.
+license: MIT
+user-invocable: true
+disable-model-invocation: false
 ---
 
 # spec-driven-dev

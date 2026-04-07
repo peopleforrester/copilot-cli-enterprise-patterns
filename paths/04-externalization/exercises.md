@@ -16,7 +16,7 @@ Compare against the answer key at the end of this file.
 
 ## Exercise 4.2 — Write a Skill that triggers (25 min)
 
-Pick a workflow you do repeatedly. Write a `SKILL.md` in `~/.config/copilot/skills/<name>/SKILL.md` with:
+Pick a workflow you do repeatedly. Write a `SKILL.md` in `~/.copilot/skills/<name>/SKILL.md` with:
 - A `name` and `description` specific enough to match
 - Numbered steps
 - Exit conditions

@@ -20,21 +20,34 @@ Aim to operate at level 4 locally and gate merges at level 5.
 
 Hooks are the only mechanism in Copilot CLI that the agent **cannot bypass**. Use them for anything that must hold.
 
-### `PreToolUse` — gate before the action
+### `preToolUse` — gate before the action (the **only** blocking event)
+Blocks by emitting `{"deny": true, "reason": "..."}` on stdout. Non-zero exit does NOT block — it logs-and-skips. Get this wrong and your "security gate" is a notification.
+
 Use cases:
-- Block edits to protected paths (`infra/`, `.github/workflows/`, secrets)
-- Block dangerous shell patterns (`rm -rf /`, `curl | sh`)
-- Lint files that are about to be modified
+- Deny edits to protected paths (`infra/`, `.github/workflows/`, secrets)
+- Deny dangerous shell patterns (`rm -rf /`, `curl | sh`)
+- Lint files about to be modified and deny on lint failure
 - Require a spec to exist in `docs/specs/` before allowing edits to a feature directory
 
-### `PostToolUse` — verify after the action
-Use cases:
+### `postToolUse` — verify after the action
+Cannot block. But output is surfaced back to the agent, which then reacts. Use cases:
 - Run the unit test tier after any source file edit
-- Run the linter after any edit
-- Refuse to mark the change "done" if test output is non-empty on stderr
+- Run the linter after any edit (as a backstop to `preToolUse`)
 - Trigger a security scanner on any new dependency manifest change
+- Refuse to mark the change "done" if test output is non-empty on stderr
 
-See `.github/hooks/` for working examples.
+### Other hook events
+| Event | Blocking? | Use for |
+|---|---|---|
+| `sessionStart` | No | Banner, env setup, prompt injection |
+| `sessionEnd` | No | Cleanup, metrics |
+| `userPromptSubmitted` | No | Prompt auditing |
+| `agentStop` / `subagentStop` | No | Completion notifications |
+| `errorOccurred` | No | Error logging |
+| `PermissionRequest` (v1.0.16+) | Decides | Programmatic permission handling |
+| `notification` (v1.0.18+) | No | Async notifications |
+
+See `.github/hooks/` for working examples and `reference/hooks-format.md` for the full schema.
 
 ## Pristine output
 
@@ -63,9 +76,9 @@ For those, you still need a human reviewer. Hooks free that human from checking 
 
 Every repo using Copilot CLI should have, at minimum:
 
-1. A `PreToolUse` lint hook covering the file types in the repo
-2. A `PostToolUse` test hook running the fast test tier
-3. `permissions.deny` rules in `settings.json` for destructive shell patterns and secret paths
+1. A `preToolUse` lint hook covering the file types in the repo (blocking via `{"deny": true}`)
+2. A `postToolUse` test hook running the fast test tier
+3. A team-wide deny-flag wrapper or admin-console policy for destructive shell + secret paths (see `enterprise/security-deny-rules.md`)
 4. CI gating merges to `main` on the same checks
 
 That's the floor. Add more as the team's pain points reveal themselves.

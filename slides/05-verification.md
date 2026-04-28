@@ -53,7 +53,7 @@ Every repo using Copilot CLI should have:
 
 1. `preToolUse` lint hook (blocks via `{"deny": true}`)
 2. `postToolUse` test hook (fast tier; non-blocking but surfaced)
-3. `permissions.deny` for destructive shell + secrets
+3. `--deny-tool` flags + `preToolUse` hook for destructive shell + secret reads
 4. CI gating merges to `main`
 
 That's the floor.

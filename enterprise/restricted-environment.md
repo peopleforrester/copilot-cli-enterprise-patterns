@@ -50,7 +50,7 @@ If your team uses an internal mirror (Artifactory, Nexus, internal PyPI), config
 
 ## What to deny
 
-See `enterprise/security-deny-rules.md` and the `permissions.deny` block in `.github/copilot/settings.json`. At minimum, deny:
+See `enterprise/security-deny-rules.md` for the canonical `--deny-tool` flag set and the `preToolUse` hook patterns. At minimum, deny:
 
 - All shell patterns that egress to non-allowlisted destinations
 - Reads of secret paths

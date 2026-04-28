@@ -55,7 +55,7 @@ Audit one project's externalization layer. Find a rule that exists in two places
 1. Linter config (not a Copilot file at all). Copilot picks it up via lint output.
 2. **Hook** — must hold every time.
 3. **Skill** — workflow triggered by request shape.
-4. **Hook** (`permissions.deny`) — must hold every time.
+4. **Hook** (`preToolUse` returning `{"deny": true}`) and/or `--deny-tool 'read(./.env)'` at launch — must hold every time.
 5. **User `instructions.md`** — personal, all repos.
 6. **`AGENTS.md`** — project rule, advisory; *also* a commit-msg hook if you want enforcement.
 7. **`AGENTS.md`** — project fact every session benefits from knowing.

@@ -34,11 +34,13 @@ Vendor-doc-vs-reality deltas. Things that surprised me or my learners. Updated a
 - **MCPs load at session start.** Adding or modifying an MCP requires restarting the CLI. The error message when you forget is unhelpful.
 - **GitHub MCP defaults to github.com.** For GHES, you need to point it at your enterprise host explicitly. Default behavior breaks silently when the agent tries to query "the wrong" GitHub.
 
-## `permissions.deny`
+## Deny rules (`--deny-tool` and `preToolUse` hooks)
 
-- **Glob matching is path-relative, not absolute.** `Read(./.env)` matches `.env` relative to the project root. `Read(.env)` matches everywhere. Be specific.
-- **Bash deny rules use regex, not glob.** `Bash(rm -rf /*)` is a regex. Forgetting this and using glob syntax silently fails to match.
+- **Copilot CLI has no `permissions.deny` block in `settings.json`.** That's a Claude Code idiom. Copilot CLI uses `--deny-tool` flags at launch, `preToolUse` hooks that emit `{"deny": true}`, and interactive grants. See `enterprise/security-deny-rules.md` for the canonical patterns.
+- **`--deny-tool` patterns target tool kinds, not arbitrary regex.** The kinds are `shell(COMMAND)`, `shell(COMMAND:*)` (stem match), `read`, `write`, `url(PATTERN)`, and MCP server names. `--deny-tool='shell(rm -rf /)'` matches that exact invocation; `--deny-tool='shell(rm:*)'` matches anything starting with `rm`. Forgetting the stem-match `:*` produces silently lax rules.
+- **Deny always wins.** Even with `--allow-all` (`--yolo`), an explicit `--deny-tool` takes precedence — by design. Use this asymmetry deliberately.
 - **Deny rules apply to the agent, not the human.** If you `chmod -R 777 .` from your terminal directly, no rule fires. The rules only protect against the agent doing it.
+- **Path-based deny lives in a hook, not a flag.** To block reads of `.env` and `secrets/`, write a `preToolUse` hook script that inspects the JSON event on stdin and emits `{"deny": true, "reason": "..."}` for matching paths. Pattern in `scripts/copilot-hooks/lint-changed.sh`.
 
 ## File operations
 

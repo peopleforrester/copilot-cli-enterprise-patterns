@@ -70,7 +70,7 @@ Point them at the current GitHub Copilot data handling docs. Don't quote it from
 Sonnet, almost always. See `reference/model-selection-2026.md`. Opus for the specific situations that earn the cost.
 
 **"Can the agent push to main?"**
-Yes, technically. That's why `permissions.deny` blocks force-push to main and why server-side branch protection is non-negotiable. Belt + suspenders.
+Yes, technically. That's why your launch wrapper should include `--deny-tool='shell(git push --force origin main)'` (and the other variants in `enterprise/security-deny-rules.md`) and why server-side branch protection is non-negotiable. Belt + suspenders.
 
 **"How do I convince my team to use hooks?"**
 Run Lab 05 with them. It changes minds in 15 minutes.

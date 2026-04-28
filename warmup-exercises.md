@@ -33,9 +33,9 @@ Ten-minute drills to run before each session. They build the habits that make th
 
 ## Warm-up 4 — Read your own deny rules
 
-1. Open `.github/copilot/settings.json`.
-2. Pick any rule in `permissions.deny`. Explain *why* it's there to a teammate (or to yourself out loud).
-3. Find one rule you don't understand. Look it up in `enterprise/security-deny-rules.md`.
+1. Open `enterprise/security-deny-rules.md`.
+2. Pick any documented `--deny-tool` pattern or `preToolUse` hook rule. Explain *why* it's there to a teammate (or to yourself out loud).
+3. Find one rule you don't understand. Read the surrounding rationale in the same doc, and check your team's launch wrapper or hook scripts to see whether it's actually wired up.
 
 **Goal:** never run with deny rules you don't understand. Friction is a feature, but only if you know what it's protecting.
 

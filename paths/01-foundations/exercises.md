@@ -50,6 +50,6 @@ Then check yourself against `patterns/four-pillars-copilot-cli.md`.
 
 ## Exercise 1.5 — Find the deny list (10 min)
 
-Open `.github/copilot/settings.json`. Pick three rules in `permissions.deny` you do not yet understand. For each, find the explanation in `enterprise/security-deny-rules.md`.
+Open `enterprise/security-deny-rules.md`. Pick three of the documented `--deny-tool` patterns (or `preToolUse` hook patterns) that you do not yet understand. For each, work out *why* the pattern is there. (Note: Copilot CLI has no `permissions.deny` block in `settings.json` — that's a Claude Code idiom; the actual mechanisms are `--deny-tool` flags and `preToolUse` hooks. The doc above explains both.)
 
 **Checkpoint:** you can explain *why* each rule exists, not just *what* it blocks.

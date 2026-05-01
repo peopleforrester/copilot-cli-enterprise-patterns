@@ -16,7 +16,7 @@ Vendor-doc-vs-reality deltas. Things that surprised me or my learners. Updated a
 - **Only `preToolUse` can block.** It blocks by emitting `{"deny": true}` on stdout. Every other hook event (`postToolUse`, `userPromptSubmit`, `stop`) runs for side-effects only and cannot stop the tool call or the agent turn. This is the most common source of "why didn't my hook block that?" bugs. See `reference/hooks-format.md` for the full protocol.
 - **No default `timeoutMs`.** Without an explicit timeout, a hung hook hangs the session. Always set a timeout.
 - **Hook scripts must be executable.** `chmod +x` your scripts. Forgetting this produces a confusing "command not found" error.
-- **Hook environment variables are not stable across versions.** `COPILOT_HOOK_FILE_PATH` is the current name as of April 2026 — verify in current docs if a hook stops getting the path.
+- **Hook event data arrives as JSON on stdin, not via environment variables.** The shipped hook scripts use `jq -r '.toolArgs.path'` to extract the file path. Full event schema in `reference/hooks-format.md`.
 
 ## Plan Mode
 

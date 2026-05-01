@@ -41,7 +41,10 @@ jobs:
       - name: Check shell scripts
         run: |
           sudo apt-get update && sudo apt-get install -y shellcheck
-          find scripts -name '*.sh' -exec shellcheck {} +
+          find scripts tests -name '*.sh' -exec shellcheck {} +
+
+      - name: Test hook scripts
+        run: bash tests/hooks/test_lint_changed.sh
 
       - name: Link check
         uses: lycheeverse/lychee-action@v2

@@ -1,0 +1,9 @@
+{
+  "version": 1,
+  "event": "preToolUse",
+  "toolName": "edit_file",
+  "toolArgs": {
+    "path": "README.md"
+  },
+  "cwd": "."
+}

@@ -2,6 +2,10 @@
 
 Vendor-doc-vs-reality deltas. Things that surprised me or my learners. Updated as new ones surface.
 
+## Platform support
+
+- **The ship-with hooks in this course are Bash only.** Windows/PowerShell equivalents are on the roadmap. File an issue if you need them sooner.
+
 ## Authentication
 
 - **GHES users:** `gh auth login --hostname github.example.corp` is required *before* Copilot CLI works against your enterprise host. Copilot CLI inherits gh's auth context — it does not have its own login flow for GHES.

@@ -5,7 +5,6 @@
       {
         "type": "command",
         "bash": "./scripts/copilot-hooks/lint-changed.sh",
-        "powershell": "./scripts/copilot-hooks/lint-changed.ps1",
         "cwd": ".",
         "timeoutSec": 30,
         "comment": "Lint files about to be edited. Returns {\"deny\": true} on lint failure to block the edit."

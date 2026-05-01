@@ -41,11 +41,11 @@ Ten-minute drills to run before each session. They build the habits that make th
 
 ## Warm-up 5 — Break a hook on purpose
 
-1. Edit `.github/hooks/post-tool-use-test.json` and change `blocking: true` to `blocking: false`.
-2. Make the test suite fail (add `assert False` somewhere).
+1. Open `.github/hooks/post-tool-use-test.json` and confirm it's a `postToolUse` hook (the event name is the JSON key).
+2. Make the test suite fail (add `assert False` somewhere in a test).
 3. Ask the agent to make a small unrelated edit.
-4. Watch what happens: the hook runs, fails, but does *not* block. The agent declares success on a broken codebase.
-5. Revert both changes. This is why advisory hooks aren't safety hooks.
+4. Watch what happens: the hook runs, prints the failure to the agent, but does *not* block — `postToolUse` cannot stop a tool call. The agent often declares success on a broken codebase anyway.
+5. Revert both changes. This is why advisory hooks aren't safety hooks: only `preToolUse` blocks (by emitting `{"deny": true}` on stdout).
 
 **Goal:** internalise "advisory works ~80%, deterministic works 100%".
 

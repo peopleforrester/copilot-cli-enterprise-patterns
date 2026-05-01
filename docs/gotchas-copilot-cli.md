@@ -13,7 +13,7 @@ Vendor-doc-vs-reality deltas. Things that surprised me or my learners. Updated a
 
 ## Hooks
 
-- **`blocking: false` is the default.** If you want a hook to actually block, you must set `blocking: true` explicitly. A non-blocking safety hook is a notification, not a guardrail.
+- **Only `preToolUse` can block.** It blocks by emitting `{"deny": true}` on stdout. Every other hook event (`postToolUse`, `userPromptSubmit`, `stop`) runs for side-effects only and cannot stop the tool call or the agent turn. This is the most common source of "why didn't my hook block that?" bugs. See `reference/hooks-format.md` for the full protocol.
 - **No default `timeoutMs`.** Without an explicit timeout, a hung hook hangs the session. Always set a timeout.
 - **Hook scripts must be executable.** `chmod +x` your scripts. Forgetting this produces a confusing "command not found" error.
 - **Hook environment variables are not stable across versions.** `COPILOT_HOOK_FILE_PATH` is the current name as of April 2026 — verify in current docs if a hook stops getting the path.

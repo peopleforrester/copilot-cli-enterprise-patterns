@@ -16,7 +16,7 @@
 Same project. Two attempts at the same question:
 
 **Attempt A:** ask in the main loop: "Find every place we call `fetchUser` and list the call sites."
-**Attempt B:** `/clear`, then `/explore Find every place we call fetchUser and list the call sites.`
+**Attempt B:** `/clear`, then ask the main agent to delegate the search to an Explore subagent: "Use the Explore subagent to find every place we call `fetchUser` and list the call sites." (Explore is a built-in subagent the main agent dispatches; there is no `/explore` slash command.)
 
 Compare:
 - Token usage (`/usage`)

@@ -6,20 +6,20 @@ Copilot CLI has a plugin system. Plugins bundle Skills, hooks, custom agents, an
 
 ```bash
 # List installed
-copilot plugins list
+copilot plugin list
 
 # Search the default marketplace
-copilot plugins search <query>
+copilot plugin search <query>
 
 # Install
-copilot plugins install <name>
+copilot plugin install <name>
 
 # Enable / disable without uninstalling
-copilot plugins enable <name>
-copilot plugins disable <name>
+copilot plugin enable <name>
+copilot plugin disable <name>
 
 # Remove
-copilot plugins uninstall <name>
+copilot plugin uninstall <name>
 ```
 
 Enabled plugins are recorded in `~/.copilot/config.json` under `enabledPlugins`, or per-project in `.github/copilot/settings.json`.
@@ -46,9 +46,9 @@ A marketplace is a git repo containing a `marketplace.json` index:
 Point Copilot CLI at a different marketplace:
 
 ```bash
-copilot plugins marketplace add internal https://github.internal/platform/copilot-marketplace
-copilot plugins marketplace list
-copilot plugins marketplace remove internal
+copilot plugin marketplace add internal https://github.internal/platform/copilot-marketplace
+copilot plugin marketplace list
+copilot plugin marketplace remove internal
 ```
 
 Enterprises should run their own vetted marketplace internally rather than letting developers install from `awesome-copilot` directly.
@@ -87,4 +87,4 @@ A plugin is just a repo with the structure above and a top-level `plugin.json`:
 }
 ```
 
-Push it to a git host, add an entry to your internal `marketplace.json`, and your team can `copilot plugins install my-team-pack`.
+Push it to a git host, add an entry to your internal `marketplace.json`, and your team can `copilot plugin install my-team-pack`.

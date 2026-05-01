@@ -6,7 +6,7 @@
 copilot --version
 ```
 
-Then launch a session and run `/model`. Confirm the default is `claude-sonnet-4-6` (or note what your org default is — some orgs override).
+Then launch a session and run `/model`. Confirm the default is `claude-sonnet-4-5` (or note what your org default is — some orgs override).
 
 **Checkpoint:** you can name the active model.
 

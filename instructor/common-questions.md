@@ -79,6 +79,7 @@ Show them the `--deny-tool` flags in your team's launch wrapper plus the `preToo
 Run Lab 05 with them. Then run the capstone. Most resistance is "I don't trust the agent." The capstone shows them what *with hooks* looks like, which is a different conversation than *without hooks*.
 
 **Q: Where do I start?**
+
 1. Cookie-cutter `AGENTS.md` from `reference/agents-md-template.md`
 2. The two minimum hooks
 3. Deny rules from `enterprise/security-deny-rules.md`

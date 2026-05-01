@@ -72,6 +72,7 @@ Confirm with your GitHub Enterprise admin what telemetry is collected at the org
 ## Logs and audit
 
 Copilot CLI session logs may contain snippets of source code. Treat them as source-code-sensitive:
+
 - Store under the same access controls as the repo itself
 - Do not ship to a third-party log aggregator without security review
 - Set retention according to your code-retention policy, not your generic application-log policy

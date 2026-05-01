@@ -28,25 +28,30 @@ Add an **API key authentication layer** to a small FastAPI service. Requirements
 You must do this in five phases. Do not skip phases. Do not skip the `/clear` between phases.
 
 ### Phase 1 — Spec
+
 - Use the `spec-driven-dev` Skill.
 - Output: `docs/specs/api-key-auth.md`
 - Stop. Get the spec right before any code.
 
 ### Phase 2 — Migration
+
 - `/clear`. Reload the spec.
 - Plan, then execute the migration.
 - Hooks should run lint and any migration tests.
 
 ### Phase 3 — Auth check + endpoints
+
 - `/clear`. Reload the spec.
 - Plan, then execute the auth middleware and the protected endpoints.
 - Hooks enforce the test loop.
 
 ### Phase 4 — Rate limit + audit log
+
 - `/clear`. Reload the spec.
 - Plan, then execute.
 
 ### Phase 5 — Code review + commit
+
 - Use the Code Review subagent against the diff.
 - Address findings.
 - `/diff`. Commit. Push to `staging`. Open PR.

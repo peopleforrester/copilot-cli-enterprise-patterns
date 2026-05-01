@@ -3,6 +3,7 @@
 A printable one-pager. For full detail, see `reference/copilot-cli-commands.md`.
 
 ## Session
+
 | Key / Command | Action |
 |---|---|
 | `Shift+Tab` | Cycle modes (Standard → Plan → Autopilot) |
@@ -17,12 +18,14 @@ A printable one-pager. For full detail, see `reference/copilot-cli-commands.md`.
 | `/quit`, `exit` | Exit |
 
 ## Planning
+
 | Command | Action |
 |---|---|
 | `Shift+Tab` (to Plan) | Enter Plan Mode |
 | `/plan` | Request a plan |
 
 ## Sessions and delegation
+
 | Command | Action |
 |---|---|
 | `&<prompt>` | Cloud delegate to GitHub Actions runner |
@@ -31,6 +34,7 @@ A printable one-pager. For full detail, see `reference/copilot-cli-commands.md`.
 | `/share gist` | Share session as gist |
 
 ## Subagents
+
 | Command | Action |
 |---|---|
 | `/fleet` | Dispatch parallel subagents from a plan |
@@ -38,6 +42,7 @@ A printable one-pager. For full detail, see `reference/copilot-cli-commands.md`.
 | (auto) | Explore, Plan, Code Review, Critic, Task delegated by the agent |
 
 ## Model
+
 | Command | Action |
 |---|---|
 | `/model` | Picker (Available / Blocked / Upgrade) |
@@ -45,6 +50,7 @@ A printable one-pager. For full detail, see `reference/copilot-cli-commands.md`.
 | `--reasoning-effort` | Adjust thinking depth |
 
 ## Inspection
+
 | Command | Action |
 |---|---|
 | `/skills` | List or invoke a skill |
@@ -55,12 +61,14 @@ A printable one-pager. For full detail, see `reference/copilot-cli-commands.md`.
 | `/config` | Show current config |
 
 ## Permissions
+
 | Command | Action |
 |---|---|
 | `/allow-all`, `/yolo` | Bypass all prompts (one-way) |
 | `/reset-allowed-tools` | Revert session grants |
 
 ## Plugins
+
 | Command | Action |
 |---|---|
 | `copilot plugin install X@awesome-copilot` | Install from default marketplace |
@@ -68,6 +76,7 @@ A printable one-pager. For full detail, see `reference/copilot-cli-commands.md`.
 | `copilot plugin update` | Update all |
 
 ## The four reflexes
+
 1. **`Shift+Tab` to Plan** for any change touching >1 file
 2. **`/clear` between** unrelated tasks
 3. **`/diff` before** every commit

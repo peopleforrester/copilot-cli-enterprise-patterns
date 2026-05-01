@@ -15,7 +15,7 @@ Spans export via OTLP/HTTP by default. Any OTel-compatible backend works: Honeyc
 
 ## Span hierarchy
 
-```
+```text
 invoke_agent                  (one per user turn)
 ├── chat                      (one per model round-trip)
 │   └── gen_ai.request.*      (model, tokens, temperature, reasoning_effort)

@@ -6,6 +6,7 @@ Ask Copilot CLI in Plan Mode:
 > "Refactor the auth module to support OAuth."
 
 Read the plan. It will be too vague. Identify three specific things missing:
+
 1. Which OAuth providers?
 2. Token storage strategy?
 3. Migration path for existing sessions?
@@ -36,6 +37,7 @@ Then do the same fix again from scratch *with* Plan Mode. Time it.
 Take a plan from Exercise 3.1 (the OAuth refactor) and convert it into a written spec at `docs/specs/oauth-refactor.md` using the structure in the `spec-driven-dev` skill.
 
 Compare:
+
 - The plan (lives in chat, dies on `/clear`)
 - The spec (lives in repo, survives sessions and reviewers)
 

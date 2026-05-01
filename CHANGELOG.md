@@ -7,6 +7,7 @@ All notable changes to this course repo. Course content drifts fast; dates matte
 Reconciliation against GitHub Copilot CLI v1.0.18 (April 2026).
 
 ### Pass 1 — factual corrections
+
 - Hook JSON schema rewritten to the real format (`type: command`, `bash`, `powershell`, `cwd`, `env`, `timeoutSec`, `comment`)
 - `preToolUse` is the only blocking event; blocks via `{"deny": true, "reason": "..."}` on **stdout**, not exit code
 - Hook scripts (`lint-changed.sh`, `run-tests.sh`) rewritten to read event JSON from stdin and emit deny objects on stdout
@@ -21,6 +22,7 @@ Reconciliation against GitHub Copilot CLI v1.0.18 (April 2026).
 - Labs 04 and 05 updated for correct event names and the `postToolUse`-can't-literally-block caveat
 
 ### Pass 2 — new content for v1.0.18 surface areas
+
 - `patterns/autopilot-mode.md` — honest framing: exists, dangerous without enforced hooks, here's the enforcement floor, here's when it's appropriate
 - `reference/custom-agents.md` — `.agent.md` files, frontmatter, three lookup locations, deduplication, auto-delegation, when to write one vs a Skill
 - `reference/cloud-delegation.md` — `&` prefix, `/delegate`, `/tasks`, `/resume`, GitHub Actions runners, draft PRs, governance
@@ -33,6 +35,7 @@ Reconciliation against GitHub Copilot CLI v1.0.18 (April 2026).
 ## [0.2.0] — 2026-04-07
 
 ### Added
+
 - Six course path modules (`paths/01-foundations` through `paths/06-enterprise-hardening`) with READMEs and exercises
 - Six labs (`lab-01-context`, `lab-02-plan-mode`, `lab-03-externalization`, `lab-04-verification`, `lab-05-break-the-hook`, `capstone-spec-driven`)
 - Sample Python app for `lab-04-verification`
@@ -49,11 +52,13 @@ Reconciliation against GitHub Copilot CLI v1.0.18 (April 2026).
 - CI workflow: markdownlint + JSON validation + link check
 
 ### Fixed
+
 - Hook JSON files in 0.1.0 referenced scripts that did not exist. Now they exist and are executable.
 
 ## [0.1.0] — 2026-04-07
 
 ### Added
+
 - Initial repo scaffold
 - README, AGENTS.md, LICENSE
 - `.github/copilot/instructions.md` and `settings.json` (deny + ask rules)

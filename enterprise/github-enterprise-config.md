@@ -51,11 +51,13 @@ If your org enforces SAML SSO with short-lived tokens, expect to re-authorize pe
 ## Branch protection
 
 The patterns in this repo assume:
+
 - `main` is protected
 - `staging` is the integration branch developers push to
 - Merges to `main` happen via PR with passing CI
 
 Configure on your GHEC/GHES:
+
 - Require pull request reviews before merging to `main`
 - Require status checks to pass before merging
 - Require branches to be up to date before merging

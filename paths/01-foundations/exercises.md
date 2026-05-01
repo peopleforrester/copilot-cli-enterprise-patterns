@@ -16,6 +16,7 @@ In a fresh session, ask:
 > "What instruction files have you loaded for this session, and from where?"
 
 Compare its answer against:
+
 - `~/.copilot/copilot-instructions.md` (user-level)
 - `<repo>/AGENTS.md` (project-level, plain markdown, nearest-wins tree walk)
 - `<repo>/.github/copilot-instructions.md` (also loaded)
@@ -28,6 +29,7 @@ In a sandbox repo, hit `Shift+Tab` and ask:
 > "Add a `/health` endpoint that returns `{status: 'ok'}` and a test for it."
 
 Read the plan. Identify:
+
 - Which files it intends to touch
 - Whether the test is specified concretely or vaguely
 - Whether it asked any clarifying questions
@@ -39,6 +41,7 @@ Push back on anything weak. Approve only when the plan is good. Then watch the e
 ## Exercise 1.4 — Recite the Four Pillars (5 min)
 
 Without looking, write down:
+
 1. ___
 2. ___
 3. ___

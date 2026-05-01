@@ -21,22 +21,27 @@ Aim to operate at level 4 locally and gate merges at level 5.
 Hooks are the only mechanism in Copilot CLI that the agent **cannot bypass**. Use them for anything that must hold.
 
 ### `preToolUse` — gate before the action (the **only** blocking event)
+
 Blocks by emitting `{"deny": true, "reason": "..."}` on stdout. Non-zero exit does NOT block — it logs-and-skips. Get this wrong and your "security gate" is a notification.
 
 Use cases:
+
 - Deny edits to protected paths (`infra/`, `.github/workflows/`, secrets)
 - Deny dangerous shell patterns (`rm -rf /`, `curl | sh`)
 - Lint files about to be modified and deny on lint failure
 - Require a spec to exist in `docs/specs/` before allowing edits to a feature directory
 
 ### `postToolUse` — verify after the action
+
 Cannot block. But output is surfaced back to the agent, which then reacts. Use cases:
+
 - Run the unit test tier after any source file edit
 - Run the linter after any edit (as a backstop to `preToolUse`)
 - Trigger a security scanner on any new dependency manifest change
 - Refuse to mark the change "done" if test output is non-empty on stderr
 
 ### Other hook events
+
 | Event | Blocking? | Use for |
 |---|---|---|
 | `sessionStart` | No | Banner, env setup, prompt injection |
@@ -52,6 +57,7 @@ See `.github/hooks/` for working examples and `reference/hooks-format.md` for th
 ## Pristine output
 
 A passing test suite that prints warnings is a failing test suite. Reasons:
+
 - Warnings hide regressions
 - Warnings desensitize humans to log output
 - Warnings in CI are usually ignored, so they accumulate

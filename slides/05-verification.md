@@ -27,6 +27,7 @@ Aim for level 4 locally. Gate merges at level 5.
 Run *before* a tool executes. Block by emitting `{"deny": true, "reason": "..."}` on **stdout** — not by exit code (non-zero exits are logged-and-skipped).
 
 Use for:
+
 - Lint files about to be edited and deny on failure
 - Deny edits to protected paths
 - Deny dangerous shell patterns
@@ -39,6 +40,7 @@ Use for:
 Run *after* a tool executes. Cannot block — but their output is surfaced back to the agent, which then reacts.
 
 Use for:
+
 - Run tests after any source edit
 - Run security scanner on dependency changes
 - Validate JSON/YAML files were written correctly

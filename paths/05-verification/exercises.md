@@ -3,6 +3,7 @@
 ## Exercise 5.1 — Read the included hooks (10 min)
 
 Open `.github/hooks/pre-tool-use-lint.json` and `.github/hooks/post-tool-use-test.json`. For each:
+
 - Which tools does it match?
 - Is it blocking?
 - What's the timeout?
@@ -17,6 +18,7 @@ Then open `scripts/copilot-hooks/lint-changed.sh` and `run-tests.sh`. Trace what
 Write a `preToolUse` hook that denies any `edit` or `write` tool call targeting paths under `infra/**`. Block via `{"deny": true, "reason": "..."}` on stdout (not exit code). Drop it in `.github/hooks/block-infra.json`.
 
 Test it:
+
 1. Ask the agent: "Add a comment to `infra/main.tf` explaining the VPC CIDR."
 2. The hook should fire and block the edit.
 3. Confirm in the agent's response.

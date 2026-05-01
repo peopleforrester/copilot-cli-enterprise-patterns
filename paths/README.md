@@ -12,6 +12,7 @@ Six modules. Each takes 45–90 minutes. Run them in order the first time.
 | 06 | Enterprise Hardening | All | `labs/capstone-spec-driven` |
 
 Each module has:
+
 - `README.md` — what you'll learn, why, and the exit criteria
 - `exercises.md` — hands-on tasks with checkpoints
 - A pointer to its lab directory (where applicable)

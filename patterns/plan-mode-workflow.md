@@ -9,6 +9,7 @@ The cheapest defect to catch is one that exists only in a plan. The most expensi
 ## When to use it
 
 **Always plan first when:**
+
 - The change touches more than one file
 - The behavior is not obvious from a one-line description
 - The work involves data migrations, schema changes, or auth
@@ -16,6 +17,7 @@ The cheapest defect to catch is one that exists only in a plan. The most expensi
 - The user request is ambiguous
 
 **Skip planning when:**
+
 - A single-file bug fix with an obvious cause
 - Trivial renames, doc fixes, comment updates
 - The task is "run this command and report the output"
@@ -47,6 +49,7 @@ The cheapest defect to catch is one that exists only in a plan. The most expensi
 Plan Mode produces an in-session plan. It lives in chat. It dies on `/clear`.
 
 A **spec** (see the `spec-driven-dev` skill) is a plan written to disk. Use specs when:
+
 - The work spans multiple sessions
 - Multiple people need to review the approach
 - The decision needs to outlive the chat history

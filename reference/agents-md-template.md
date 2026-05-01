@@ -88,7 +88,7 @@ Place these under `.github/instructions/`. Use them when a rule applies to one s
 
 For monorepos:
 
-```
+```text
 repo/
 ├── AGENTS.md                  ← root rules
 ├── packages/

@@ -61,14 +61,17 @@ When `/model` is set to **Auto**, Copilot CLI routes across eligible models inte
 ```text
 /model
 ```
+
 Interactive picker with **Available / Blocked / Upgrade** tabs.
 
 ```text
 /model claude-opus-4-6
 ```
+
 Switches for the current session.
 
 Alternatives:
+
 - `--model MODEL_STRING` flag at launch
 - `COPILOT_MODEL` environment variable
 - `~/.copilot/config.json` → `"model": "..."` for the persistent default

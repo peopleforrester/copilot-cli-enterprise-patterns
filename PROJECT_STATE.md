@@ -3,12 +3,15 @@
 Durable state for `/continue`. Update this at every transition.
 
 ## Current state
+
 Repo scaffolded with full course structure. All Four Pillars patterns documented. Skills, hooks, scripts, reference docs, paths, labs, slides, and instructor notes in place.
 
 ## Branch
+
 `staging` — synced with `main`. Branch protection should be enabled on `main` server-side.
 
 ## Recently completed
+
 - Initial repo scaffold (README, AGENTS.md, settings.json, instructions.md, LICENSE)
 - Three Skills (api-scaffold, docker-review, spec-driven-dev)
 - Two hooks (pre-tool-use-lint, post-tool-use-test) with working scripts
@@ -22,10 +25,12 @@ Repo scaffolded with full course structure. All Four Pillars patterns documented
 - gotchas-copilot-cli.md, CHANGELOG.md, CONTRIBUTING.md
 
 ## Next
+
 - Record video walkthroughs for each path module
 - Pilot the course with a small cohort and capture feedback
 - Add more labs as gaps surface
 - Refresh `model-selection-2026.md` and `mcp-catalog-2026.md` quarterly
 
 ## Tests / CI
+
 GitHub Actions runs markdownlint, JSON validation, and link check on every push to `staging` and PR to `main`.

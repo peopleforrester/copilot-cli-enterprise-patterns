@@ -56,7 +56,7 @@ Then launch Copilot CLI in any repo and the patterns are active.
 
 ## Repo layout
 
-```
+```text
 .
 ├── README.md                          Overview + Four Pillars
 ├── AGENTS.md                          Project-level instructions (loaded every session)

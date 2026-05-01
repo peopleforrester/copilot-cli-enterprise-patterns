@@ -15,15 +15,19 @@ Copilot CLI auto-compacts at ~95% context utilization. It is not a substitute fo
 ## Levers
 
 ### `/clear`
+
 Resets the conversation. Use it:
+
 - Between unrelated tasks (the *one feature per session* rule)
 - After a long debugging detour that polluted context with red herrings
 - When you notice the agent referencing decisions that no longer apply
 
 ### `/usage`
+
 Reports current token consumption. Glance at it before starting any task you expect to be long.
 
 ### Subagents
+
 Subagents run in their own context windows. Output comes back to the main session as a summary, not as the raw search results.
 
 | Subagent | Use for |
@@ -36,6 +40,7 @@ Subagents run in their own context windows. Output comes back to the main sessio
 **Rule of thumb:** if a search would dump >2000 tokens of grep output into context, use Explore instead.
 
 ### Targeted file reads
+
 Read the lines you need, not the whole file. A 4000-line file read for one function is 4000 tokens you don't get back.
 
 ## Habits

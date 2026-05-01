@@ -9,6 +9,7 @@ Now unset and try again. Document the difference for your team's runbook — thi
 ## Exercise 6.2 — Build the security review packet (30 min)
 
 Imagine your security team needs a one-page document covering:
+
 - What data leaves the network when Copilot CLI runs
 - Where it goes
 - Retention guarantees
@@ -23,6 +24,7 @@ Draft it. Use `enterprise/restricted-environment.md` and `enterprise/security-de
 ## Exercise 6.3 — Onboard a fictional new developer (15 min)
 
 Write a single shell script that:
+
 1. Copies user-level instructions and settings to `~/.copilot/` (or `$COPILOT_HOME` if set)
 2. Copies user-level Skills
 3. Verifies `gh auth status` is authenticated against your GHE host

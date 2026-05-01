@@ -92,6 +92,7 @@ Total: ~15 minutes. Don't rehearse it to perfection — *some* friction is hones
 ## Debrief discipline
 
 After every lab:
+
 - 2 minutes individual reflection (silent)
 - 5 minutes small group share
 - 5 minutes whole class

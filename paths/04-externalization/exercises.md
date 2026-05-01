@@ -17,6 +17,7 @@ Compare against the answer key at the end of this file.
 ## Exercise 4.2 — Write a Skill that triggers (25 min)
 
 Pick a workflow you do repeatedly. Write a `SKILL.md` in `~/.copilot/skills/<name>/SKILL.md` with:
+
 - A `name` and `description` specific enough to match
 - Numbered steps
 - Exit conditions
@@ -29,6 +30,7 @@ Restart Copilot CLI. Make a request that should trigger the Skill. Check whether
 ## Exercise 4.3 — Slim your AGENTS.md (15 min)
 
 Open the `AGENTS.md` of any project you actively work on. Cut anything that:
+
 - Duplicates linter config
 - Is historical narrative ("we used to...")
 - Is personal preference (move to user instructions)

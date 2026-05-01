@@ -6,6 +6,7 @@
 ## Scenario
 
 A small Python project lives in `labs/lab-04-verification/sample-app/`. It has:
+
 - One module (`calculator.py`)
 - One test file (`test_calculator.py`)
 - A failing test (deliberate)

@@ -52,6 +52,7 @@ Course content drifts. Patterns get refined. Vendor docs change. Contributions a
 ## CI
 
 The CI workflow runs:
+
 - `markdownlint` on all `.md` files
 - JSON validation on all `.json` files
 - Link check on all markdown links

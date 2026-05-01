@@ -29,8 +29,10 @@ Copilot CLI runs **Claude Sonnet 4.5** by default — the same Anthropic model f
 
 ## Quick start
 
+Fork this repo, then:
+
 ```bash
-git clone git@github.com:peopleforrester/copilot-cli-enterprise-patterns.git
+git clone git@github.com:<your-fork>/copilot-cli-enterprise-patterns.git
 cd copilot-cli-enterprise-patterns
 
 # Apply user-level Copilot config

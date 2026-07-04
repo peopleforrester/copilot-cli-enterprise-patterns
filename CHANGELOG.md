@@ -2,6 +2,22 @@
 
 All notable changes to this course repo. Course content drifts fast; dates matter.
 
+## [0.4.0] — 2026-06-18
+
+Version refresh against GitHub Copilot CLI v1.0.63 (June 2026) and current CI tooling.
+
+### Model roster refresh
+
+- `reference/model-selection-2026.md` — premium roster updated: **Claude Opus 4.8** now leads (deepest reasoning), Opus 4.7 added, Opus 4.6 noted with fast-mode preview; **Fable 5**, **GPT-5.5**, **Gemini 3.1 Pro** (preview), **Gemini 3.5 Flash**, and **MAI-Code-1-Flash** added; decision table and cost intuition now point to Opus 4.8
+- Default model unchanged — **Claude Sonnet 4.5** remains the Copilot CLI default
+- Opus 4.6 → 4.8 and Gemini 3 Pro/Flash → 3.1 Pro/3.5 Flash across `README.md`, `slides/01-foundations.md`, `patterns/four-pillars-copilot-cli.md`, `reference/custom-agents.md`, `enterprise/copilot-vs-claude-code.md`, `instructor/common-questions.md`, `command-reference.md`
+- Version stamps advanced from "April 2026 (v1.0.18)" to "June 2026 (v1.0.63)" in the command reference and model-selection guide
+
+### CI tooling
+
+- `actions/checkout` v4 → v5, `actions/setup-node` v4 → v5, Node 20 → 22
+- `markdownlint-cli` 0.41.0 → 0.48.0; disabled new **MD060/table-column-style** rule (the course uses compact tables intentionally)
+
 ## [0.3.0] — 2026-04-07
 
 Reconciliation against GitHub Copilot CLI v1.0.18 (April 2026).

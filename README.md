@@ -10,7 +10,7 @@ This repo is not a tutorial. It is a working set of configs, hooks, skills, and 
 
 A practitioner reference for teams adopting Copilot CLI under real enterprise constraints: GitHub Enterprise (Cloud or Server), restricted internet, security review requirements, and deterministic verification needs.
 
-Copilot CLI runs **Claude Sonnet 4.5** by default — the same Anthropic model family that powers Claude Code. You can switch to Sonnet 4.6, Opus 4.6, Haiku 4.5, GPT-5.x, Gemini 3 Pro/Flash, or free models (GPT-5 mini, GPT-4.1, GPT-4o) via `/model`. The mental model, commands, and externalization patterns map directly across agentic CLIs, which is why these patterns transfer.
+Copilot CLI runs **Claude Sonnet 4.5** by default — the same Anthropic model family that powers Claude Code. You can switch to Sonnet 4.6, Opus 4.7/4.8, Fable 5, Haiku 4.5, GPT-5.x, Gemini 3.1 Pro/3.5 Flash, or free models (GPT-5 mini, GPT-4.1) via `/model`. The mental model, commands, and externalization patterns map directly across agentic CLIs, which is why these patterns transfer.
 
 ---
 

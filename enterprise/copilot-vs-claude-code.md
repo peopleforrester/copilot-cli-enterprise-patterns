@@ -4,7 +4,7 @@ You will be asked this question. Here is the honest answer.
 
 ## Both run the same model by default
 
-Both Copilot CLI and Claude Code default to a **Claude Sonnet** model (Sonnet 4.5 in Copilot CLI as of April 2026; both 4.5 and 4.6 are 1×). The mental model — the Four Pillars, plan mode, Skills, hooks, MCPs — is identical. Most of what you learn in one transfers to the other.
+Both Copilot CLI and Claude Code default to a **Claude Sonnet** model (Sonnet 4.5 in Copilot CLI as of June 2026; both 4.5 and 4.6 are 1×). The mental model — the Four Pillars, plan mode, Skills, hooks, MCPs — is identical. Most of what you learn in one transfers to the other.
 
 The differences are about **packaging, contracting, and integration**, not model quality.
 
@@ -14,7 +14,7 @@ The differences are about **packaging, contracting, and integration**, not model
 - **GitHub MCP built in.** Issues, PRs, branches, releases as native tools without configuration.
 - **GHEC and GHES support.** Works with self-hosted GitHub Enterprise Server (within the supported version matrix).
 - **Org-level policy controls.** Public code matching, suggestions filtering, telemetry — administered through your existing GitHub org settings.
-- **Multi-model.** First-class `/model` switching to GPT-5.3-Codex and Gemini 3 Pro alongside Claude Opus and Sonnet.
+- **Multi-model.** First-class `/model` switching to GPT-5.3-Codex and Gemini 3.1 Pro alongside Claude Opus and Sonnet.
 - **SSO out of the box.** SAML / SCIM if your org is already using them with GitHub.
 
 ## Where Claude Code wins

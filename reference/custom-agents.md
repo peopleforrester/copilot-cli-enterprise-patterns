@@ -22,7 +22,7 @@ tools:
   - read
   - shell(rg*)
   - shell(gitleaks*)
-model: claude-opus-4-6
+model: claude-opus-4-8
 visible: true
 handoffs:
   - code-review
@@ -67,7 +67,7 @@ Agents are deduplicated by `name`. Project-level entries override user-level. Th
 
 - You have a repeated review pattern that doesn't fit a Skill (Skills are procedures; agents are personas with tool scopes and models)
 - You want a tool-restricted agent (read-only code reviewer, for example)
-- You want to pin a specific model for a specific role (Opus 4.6 for architecture review, Haiku for doc polish)
+- You want to pin a specific model for a specific role (Opus 4.8 for architecture review, Haiku for doc polish)
 - You want an agent the primary can hand off to via `handoffs`
 
 ## When NOT to write a custom agent

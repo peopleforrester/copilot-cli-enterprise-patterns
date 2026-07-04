@@ -46,7 +46,7 @@ A printable one-pager. For full detail, see `reference/copilot-cli-commands.md`.
 | Command | Action |
 |---|---|
 | `/model` | Picker (Available / Blocked / Upgrade) |
-| `/model claude-opus-4-6` | Switch to Opus for this session |
+| `/model claude-opus-4-8` | Switch to Opus for this session |
 | `--reasoning-effort` | Adjust thinking depth |
 
 ## Inspection

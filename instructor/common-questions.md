@@ -18,8 +18,8 @@ Yes. Many teams do. Pick the one that matches your enterprise contract and stick
 **Q: Why is Sonnet 4.5 the default?**
 ~95% of Opus's coding ability at a fraction of the cost. For 90% of work, Sonnet is the right choice. Sonnet 4.6 is also 1× and worth A/B-testing on your workload. Opus earns the cost on multi-file refactors, security audits, and long autonomous runs.
 
-**Q: When should I switch to GPT-5.3-Codex or Gemini 3 Pro?**
-GPT-5.3-Codex if your team prefers it for tight inner-loop JS/TS work. Gemini 3 Pro for tasks involving PDFs or screenshots. Otherwise stay on Sonnet.
+**Q: When should I switch to GPT-5.3-Codex or Gemini 3.1 Pro?**
+GPT-5.3-Codex if your team prefers it for tight inner-loop JS/TS work. Gemini 3.1 Pro for tasks involving PDFs or screenshots. Otherwise stay on Sonnet.
 
 **Q: Can I switch mid-session?**
 Technically yes. Practically: `/clear` first. The new model inherits a context shaped by the previous model's choices, which is rarely what you want.

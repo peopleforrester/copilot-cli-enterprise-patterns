@@ -13,15 +13,15 @@ jobs:
   validate:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Set up Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
-          node-version: "20"
+          node-version: "22"
 
       - name: Install markdownlint-cli
-        run: npm install -g markdownlint-cli@0.41.0
+        run: npm install -g markdownlint-cli@0.48.0
 
       - name: Lint markdown
         run: markdownlint '**/*.md' --ignore node_modules --ignore labs/lab-03-externalization/inherited-AGENTS.md

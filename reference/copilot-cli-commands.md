@@ -1,6 +1,6 @@
 # Copilot CLI Command Reference
 
-Every command, what it does, when to use it. Current as of April 2026 (v1.0.18+).
+Every command, what it does, when to use it. Current as of June 2026 (v1.0.63+).
 
 ## Session control
 

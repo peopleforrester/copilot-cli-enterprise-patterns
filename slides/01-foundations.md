@@ -16,7 +16,7 @@ The mental model before the keystrokes.
 
 - An **agentic** CLI: plans, acts, observes, adapts
 - Default model: **Claude Sonnet 4.5** (same Anthropic family as Claude Code)
-- Switch via `/model` to Sonnet 4.6, Opus 4.6, Haiku 4.5, GPT-5.x, Gemini 3 Pro/Flash, free tier
+- Switch via `/model` to Sonnet 4.6, Opus 4.7/4.8, Haiku 4.5, GPT-5.x, Gemini 3.1 Pro/3.5 Flash, free tier
 - Built-in GitHub MCP — issues, PRs, branches as native tools
 - Three modes (Standard / Plan / Autopilot) cycled with `Shift+Tab`
 

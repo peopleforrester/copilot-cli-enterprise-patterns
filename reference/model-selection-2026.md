@@ -35,9 +35,7 @@ Copilot CLI ships with **Claude Sonnet 4.5** as the default and supports switchi
 
 - **GPT-5 mini**
 - **GPT-4.1**
-- **GPT-4o**
-- **Grok Code Fast 1**
-- **Raptor mini**
+- **Raptor mini** (fine-tuned GPT-5 mini, preview)
 
 These don't draw down your premium request budget. Useful for high-volume routine work where Sonnet would be overkill.
 
@@ -50,7 +48,7 @@ When `/model` is set to **Auto**, Copilot CLI routes across eligible models inte
 | Task | Model |
 |---|---|
 | One-line bug fix, doc typo, scaffolding | Haiku 4.5 (or a free model) |
-| High-volume routine work where free models suffice | GPT-5 mini, GPT-4.1, or GPT-4o (free tier) |
+| High-volume routine work where free models suffice | GPT-5 mini or GPT-4.1 (free tier) |
 | Standard feature work, daily TDD cycles | **Sonnet 4.5** (default) |
 | Multi-file refactor (>10 files), dependency mapping | Opus 4.8 |
 | Security audit, architecture review | Opus 4.8 |
@@ -88,7 +86,7 @@ Some models support adjustable reasoning depth via `--reasoning-effort` (alias `
 
 Order of magnitude only — check current pricing:
 
-- Free tier (`gpt-5-mini`, `gpt-4.1`, `gpt-4o`, etc.) ≈ 0× on paid plans
+- Free tier (`gpt-5-mini`, `gpt-4.1`, etc.) ≈ 0× on paid plans
 - Haiku ≈ 1× (low multiplier)
 - **Sonnet 4.5 / 4.6 ≈ 1×** (default)
 - Opus 4.7 / 4.8 ≈ premium (substantially higher)
@@ -100,4 +98,4 @@ For most teams the right ratio is roughly **70% Sonnet / 20% free-or-Haiku / 10%
 - **Don't switch to Opus "just to be safe."** The over-thinking on trivial tasks costs more than it saves.
 - **Don't switch models mid-task without `/clear` first.** The new model inherits a context shaped by the previous model's choices.
 - **Don't trust benchmarks over your own dogfooding.** Run the same week of real work on Sonnet 4.5, 4.6, and Auto, then decide.
-- **Don't ignore the free tier.** A GPT-4o pass on routine work for free is worth knowing about.
+- **Don't ignore the free tier.** A GPT-4.1 pass on routine work for free is worth knowing about.

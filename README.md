@@ -1,4 +1,4 @@
-# copilot-cli-enterprise-patterns
+# Copilot CLI Enterprise Patterns
 
 Reference patterns for configuring **GitHub Copilot CLI** for enterprise engineering teams operating in restricted environments.
 

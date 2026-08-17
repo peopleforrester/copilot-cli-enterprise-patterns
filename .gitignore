@@ -7,3 +7,7 @@ __pycache__/
 node_modules/
 slides/out/
 .DS_Store
+
+# Transcription-pipeline drop zone: routed here for the local agent to read and
+# process, never committed. These are raw internal transcripts, not repo content.
+transcripts/

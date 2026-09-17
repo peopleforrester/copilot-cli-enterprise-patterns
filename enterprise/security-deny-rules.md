@@ -8,7 +8,7 @@ Copilot CLI's permission system uses **CLI flags and interactive grants**, not a
 2. **Flags drive the policy** at session start: `--allow-tool=...`, `--deny-tool=...`, `--available-tools=...`, `--excluded-tools=...`.
 3. **Deny always wins.** Even with `--allow-all` (`--yolo`), an explicit `--deny-tool` takes precedence.
 4. **Interactive grants** persist to `~/.copilot/` when the user picks "approve permanently". These accumulate over a working session.
-5. **Enterprise policy cascade** (Enterprise → Org → User) is administered through the GitHub admin console UI, not a file you edit. **Confirmed gap as of April 2026: MCP policies do not yet apply to CLI** at the org level — track this.
+5. **Enterprise policy cascade** (Enterprise → Org → User) is administered through the GitHub admin console UI and enterprise `managed-settings.json`, not a file the end user edits. As of September 2026, enterprise and org **MCP allowlists do apply to the CLI**: the `allowedMcpServers`/`deniedMcpServers` managed-settings keys (since August 2026) and a custom MCP registry (BYOR, since April 2026) are enforced at runtime on Copilot CLI, the Copilot app, and VS Code. The April 2026 gap is closed.
 
 ## Principles
 
@@ -130,7 +130,7 @@ Don't `--allow-all`. Don't `--deny-tool` either. Let the prompt fire and approve
 ```json
 {
   "version": 1,
-  "model": "claude-sonnet-4-5",
+  "model": "claude-sonnet-4-6",
   "enabledPlugins": [],
   "telemetry": { "enabled": false }
 }

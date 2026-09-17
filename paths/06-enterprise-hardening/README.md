@@ -25,7 +25,7 @@
 
 ## New surface areas (v1.0.18)
 
-Enterprise rollouts in April 2026 need to account for four things that didn't exist in older courses:
+As of September 2026, enterprise rollouts need to account for four things that didn't exist in older courses:
 
 1. **Autopilot mode** — the third `Shift+Tab` mode. High productivity, high blast radius. Only safe on repos with the verification pillar fully wired. See `patterns/autopilot-mode.md`.
 2. **Cloud delegation** (`&` prefix, `/delegate`, `/tasks`, `/resume`) — agent work runs on a GitHub Actions runner and comes back as a draft PR. Governance lives in the Copilot admin console. See `reference/cloud-delegation.md`.

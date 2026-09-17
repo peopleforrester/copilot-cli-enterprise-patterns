@@ -2,7 +2,7 @@
 
 The Four Pillars are tool-agnostic. The mechanics differ slightly between Claude Code and Copilot CLI, but the principles are identical. This doc maps each pillar to the specific Copilot CLI commands and workflows that implement it.
 
-> Default model is **Claude Sonnet 4.5** — the same Anthropic model family that powers Claude Code. `/model` switches to Sonnet 4.6, Opus 4.7/4.8, Haiku 4.5, GPT-5.x, Gemini 3.1 Pro/3.5 Flash, or free models.
+> Default model is **Claude Sonnet 4.6** — the same Anthropic model family that powers Claude Code. `/model` switches to Sonnet 5, Opus 5, Haiku 4.5, GPT-5.x/GPT-6 Astra, Gemini 3.8 Flash, or free models.
 
 ---
 

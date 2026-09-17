@@ -1,4 +1,4 @@
-# MCP Catalog — April 2026
+# MCP Catalog — September 2026
 
 Model Context Protocol servers extend Copilot CLI with new tools. The GitHub MCP is built in. This page lists the additional MCPs worth considering for an enterprise team and what each one buys you.
 
@@ -58,7 +58,7 @@ Custom MCP pointing at your internal docs site.
 
 Browser automation. Useful for end-to-end test authoring and scraping local dev servers.
 
-## Not recommended (yet, as of April 2026)
+## Not recommended (yet, as of September 2026)
 
 - General web-browsing MCPs — too broad, too easy to lose context
 - Email MCPs — high blast radius, low hit rate for engineering work
@@ -125,9 +125,14 @@ copilot --deny-tool='MyMCP(dangerous_tool)'
 
 **MCPs load at session start.** Adding or modifying an MCP requires restarting the CLI for changes to take effect. The error message when you forget is unhelpful — see `docs/gotchas-copilot-cli.md`.
 
-## Org policy gap (track this)
+## Org and enterprise MCP policy
 
-As of April 2026, **organisation-level MCP policies do not currently apply to Copilot CLI** — confirmed gap. Server-side MCP allowlists administered through the admin console affect IDE Copilot but not the CLI yet. If your org requires MCP control on the CLI, enforce it through:
+As of September 2026, **organisation- and enterprise-level MCP allowlists apply to Copilot CLI.** Administer them centrally two ways, both enforced at runtime on the CLI, the Copilot app, and VS Code:
+
+- **Enterprise managed settings** (since August 2026): the `allowedMcpServers` and `deniedMcpServers` keys in your enterprise `managed-settings.json` (committed to the source org's `.github-private` repo at `copilot/managed-settings.json`). Built-in servers are always allowed; deny always wins; if `allowedMcpServers` is present, anything not on it is blocked.
+- **Custom MCP registry (BYOR)** (since April 2026): point the org or enterprise Copilot policy at an internally managed MCP registry URL, and any server not defined there is blocked at runtime.
+
+For defense-in-depth, or where central policy is not yet configured, also enforce locally through:
 
 - The user-level `~/.copilot/mcp-config.json` shipped via your standard onboarding
 - A `preToolUse` hook that denies calls to non-allowlisted MCPs

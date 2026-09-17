@@ -7,7 +7,7 @@
 
 - What Copilot CLI is and isn't
 - The Four Pillars and why they exist
-- The default model (Sonnet 4.5) and when to switch
+- The default model (Sonnet 4.6) and when to switch
 - The mental model: agentic CLI as collaborator, not autocomplete
 
 ## Why it matters

@@ -2,6 +2,25 @@
 
 All notable changes to this course repo. Course content drifts fast; dates matter.
 
+## [0.5.0] — 2026-09-17
+
+September 2026 currency pass against GitHub Copilot CLI v1.0.85 and the live model roster.
+
+### Model roster (verified against GitHub docs, 2026-09-17)
+
+- **Default changed: Claude Sonnet 4.5 → Sonnet 4.6.** Sonnet 4.5, Opus 4.5, and Opus 4.6 were **retired 2026-09-01**. Updated the default claim and removed retired models across `README.md`, `reference/model-selection-2026.md`, `slides/01-foundations.md`, `patterns/four-pillars-copilot-cli.md`, `paths/01-foundations/README.md`, `paths/01-foundations/exercises.md`, `enterprise/copilot-vs-claude-code.md`, `enterprise/security-deny-rules.md`, `instructor/common-questions.md`
+- **Deep-work recommendations moved Opus 4.8 → Opus 5** (`claude-opus-5`), the current flagship; Opus 4.7/4.8 kept as available prior generations. `reference/custom-agents.md` and `command-reference.md` examples updated
+- Roster additions: **Sonnet 5, Fable 5.1, GPT-6 Astra, GPT-5.6 (Luna/Sol/Terra), Gemini 3.8 Flash**; dropped Gemini 2.5 Pro / 3.1 Pro and MAI-Code-1-Flash (no longer listed for the CLI; MAI-Code-1-Flash retired 2026-09-10)
+- Version stamps advanced June 2026 (v1.0.63) → September 2026 (v1.0.85)
+
+### Corrected recency claim
+
+- **Org/enterprise MCP allowlists now apply to Copilot CLI.** The prior "confirmed gap (April 2026)" claim in `reference/mcp-catalog-2026.md` and `enterprise/security-deny-rules.md` was corrected: registry-based allowlists shipped April 2026 and `allowedMcpServers`/`deniedMcpServers` enterprise managed settings began enforcing on the CLI in August 2026
+
+### CI tooling
+
+- `markdownlint-cli` 0.48.0 → 0.49.1; Node 22 → 24 (Node 20 removed from GitHub runners 2026-09-16)
+
 ## [0.4.0] — 2026-06-18
 
 Version refresh against GitHub Copilot CLI v1.0.63 (June 2026) and current CI tooling.

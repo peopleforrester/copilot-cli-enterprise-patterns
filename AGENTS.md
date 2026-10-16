@@ -46,3 +46,5 @@ The `preToolUse` and `postToolUse` hooks in `.github/hooks/` enforce steps 1 and
 - **One feature per session.** When the current task is done, `/clear` before starting the next.
 - **Externalize learnings.** If you discover a non-obvious convention or gotcha, add it to this file or the relevant Skill — do not let it live only in chat.
 - **Ask, don't assume.** If a requirement is ambiguous, ask. Do not guess and ship.
+
+Test command: `bash tests/run.sh`

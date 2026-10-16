@@ -65,6 +65,7 @@ require() {
 
 require bash
 require jq
+require shellcheck
 
 if [[ ! -x "${HOOK}" ]]; then
     printf 'FAIL: hook script not executable: %s\n' "${HOOK}" >&2
@@ -97,6 +98,36 @@ event_missing=$(jq -n --arg path "${TMPDIR_TEST}/does-not-exist.py" \
     '{version: 1, event: "preToolUse", toolName: "edit_file", toolArgs: {path: $path}, cwd: "."}')
 out="$(printf '%s' "${event_missing}" | "${HOOK}")"
 assert_no_deny "non-existent file is approved (new-file branch)" "${out}" "$?"
+
+# --- Test 5: shell script with a shellcheck error → deny ---
+# SC2068 (unquoted $@) is an error-level finding, stable across shellcheck versions.
+cat > "${TMPDIR_TEST}/bad.sh" <<'EOF'
+#!/usr/bin/env bash
+for a in $@; do echo "$a"; done
+EOF
+event=$(jq -n --arg path "${TMPDIR_TEST}/bad.sh" \
+    '{version: 1, event: "preToolUse", toolName: "edit_file", toolArgs: {path: $path}, cwd: "."}')
+out="$(printf '%s' "${event}" | "${HOOK}")"
+assert_deny "shellcheck failure on .sh target produces deny" "${out}" "$?"
+
+# --- Test 6: clean shell script → no deny ---
+cat > "${TMPDIR_TEST}/good.sh" <<'EOF'
+#!/usr/bin/env bash
+for a in "$@"; do echo "$a"; done
+EOF
+out="$(jq -n --arg path "${TMPDIR_TEST}/good.sh" \
+    '{version: 1, event: "preToolUse", toolName: "edit_file", toolArgs: {path: $path}, cwd: "."}' \
+    | "${HOOK}")"
+assert_no_deny "clean .sh target is approved" "${out}" "$?"
+
+# --- Tests 7-9: path read from the alternate toolArgs keys ---
+# Tools name the target differently; a missed key would silently skip linting.
+for key in file_path filePath filename; do
+    event=$(jq -n --arg path "${TMPDIR_TEST}/broken.json" --arg key "${key}" \
+        '{version: 1, event: "preToolUse", toolName: "edit_file", toolArgs: {($key): $path}, cwd: "."}')
+    out="$(printf '%s' "${event}" | "${HOOK}")"
+    assert_deny "toolArgs.${key} is read as the target path" "${out}" "$?"
+done
 
 # --- Summary ---
 printf '\n%d/%d passed\n' "$((test_count - fail_count))" "${test_count}"

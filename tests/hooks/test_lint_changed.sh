@@ -58,7 +58,7 @@ assert_deny() {
 
 require() {
     if ! command -v "$1" >/dev/null 2>&1; then
-        printf 'SKIP: %s not on PATH\n' "$1" >&2
+        printf 'FAIL: required tool not on PATH: %s\n' "$1" >&2
         exit 2
     fi
 }
@@ -66,6 +66,9 @@ require() {
 require bash
 require jq
 require shellcheck
+# Without markdownlint the hook's .md branch is a no-op and the Markdown cases pass vacuously.
+# CI installs it globally; tests/run.sh puts the pinned tests/bin/markdownlint shim on PATH.
+require markdownlint
 
 if [[ ! -x "${HOOK}" ]]; then
     printf 'FAIL: hook script not executable: %s\n' "${HOOK}" >&2
@@ -128,6 +131,14 @@ for key in file_path filePath filename; do
     out="$(printf '%s' "${event}" | "${HOOK}")"
     assert_deny "toolArgs.${key} is read as the target path" "${out}" "$?"
 done
+
+# --- Test 10: Markdown file with a markdownlint error → deny ---
+# MD018 (no space after # in a heading) is on in both the default and the repo config.
+printf '#Heading without a space\n' > "${TMPDIR_TEST}/bad.md"
+event=$(jq -n --arg path "${TMPDIR_TEST}/bad.md" \
+    '{version: 1, event: "preToolUse", toolName: "edit_file", toolArgs: {path: $path}, cwd: "."}')
+out="$(printf '%s' "${event}" | "${HOOK}")"
+assert_deny "markdownlint failure on .md target produces deny" "${out}" "$?"
 
 # --- Summary ---
 printf '\n%d/%d passed\n' "$((test_count - fail_count))" "${test_count}"

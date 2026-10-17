@@ -34,3 +34,5 @@ Repo scaffolded with full course structure. All Four Pillars patterns documented
 ## Tests / CI
 
 GitHub Actions runs markdownlint, JSON validation, and link check on every push to `staging` and PR to `main`.
+
+Locally, `bash tests/run.sh` runs the offline CI steps: shellcheck, markdownlint (same `markdownlint-cli` pin as CI, through `npx`), JSON validation, and the hook test suites. The link check needs the network, so it is not part of the local run.

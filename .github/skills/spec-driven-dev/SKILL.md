@@ -30,6 +30,7 @@ Save the spec to `docs/specs/<short-name>.md`. Stop. Show it to the user.
 ## Phase 2 — Review the spec
 
 Wait for the user to:
+
 - answer open questions, or
 - approve as-is, or
 - request changes.

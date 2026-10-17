@@ -19,12 +19,14 @@ Use when the user asks to review, audit, or improve a Dockerfile.
 ## Checklist
 
 ### Blocker
+
 - [ ] Pinned base image (digest preferred, tag minimum). No `:latest`.
 - [ ] No secrets baked in (no `ARG`/`ENV` containing tokens, keys, passwords).
 - [ ] Final stage runs as a non-root `USER`.
 - [ ] No `curl ... | sh` style remote execution in build steps.
 
 ### High
+
 - [ ] Multi-stage build separating build deps from runtime.
 - [ ] `COPY` is scoped — no `COPY . .` without a `.dockerignore`.
 - [ ] `.dockerignore` exists and excludes `.git`, `node_modules` (when rebuilt), `*.env`, `secrets/`.
@@ -32,19 +34,21 @@ Use when the user asks to review, audit, or improve a Dockerfile.
 - [ ] Pinned package versions where the ecosystem supports it.
 
 ### Medium
+
 - [ ] `HEALTHCHECK` defined for long-running services.
 - [ ] `EXPOSE` documents the runtime port.
 - [ ] Layers ordered for cache efficiency (deps before source).
 - [ ] Image labels (`org.opencontainers.image.*`) for source, revision, version.
 
 ### Low
+
 - [ ] `WORKDIR` set explicitly, not relying on `/`.
 - [ ] `ENTRYPOINT` uses exec form (`["bin", "arg"]`), not shell form.
 - [ ] No trailing commented-out junk.
 
 ## Output format
 
-```
+```text
 docker-review: <path/to/Dockerfile>
 
 BLOCKER (n)

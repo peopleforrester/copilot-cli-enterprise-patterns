@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ABOUTME: Heavy test tier: markdownlint and a live link check over every tracked Markdown file.
-# ABOUTME: Needs the network and both tools on PATH; fails loudly instead of skipping when absent.
+# ABOUTME: Needs the network and both tools on PATH; any missing prerequisite is a test failure.
 
 set -uo pipefail
 
@@ -16,7 +16,7 @@ declare -A install_hint=(
 for tool in git markdownlint lychee; do
     if ! command -v "${tool}" >/dev/null 2>&1; then
         printf 'FAIL: required tool not on PATH: %s (%s)\n' "${tool}" "${install_hint[${tool}]}" >&2
-        exit 2
+        exit 1
     fi
 done
 
@@ -24,7 +24,7 @@ done
 # so say that once rather than burying it under hundreds of per-link errors.
 if ! git ls-remote --exit-code https://github.com/lycheeverse/lychee HEAD >/dev/null 2>&1; then
     printf 'FAIL: network unreachable (cannot reach github.com); the link check needs it\n' >&2
-    exit 2
+    exit 1
 fi
 
 # Tracked files only, so untracked drop zones (transcripts/, node_modules/) never leak in.

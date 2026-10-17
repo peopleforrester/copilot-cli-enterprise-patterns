@@ -17,7 +17,7 @@ bash tests/hooks/test_run_tests.sh
 
 Requires `bash`, `jq`, `shellcheck`, `timeout` (GNU coreutils), and `npx` (Node.js). CI installs `markdownlint-cli` globally; locally `tests/bin/markdownlint` runs the same pinned version through `npx`, which downloads it on first use and caches it after that. Each suite exits 0 on all-pass, 1 on any failure, 2 if a required tool is missing. `tests/run.sh` treats a missing tool as a failure.
 
-`tests/e2e.sh` is the heavy tier: markdownlint and a lychee link check over every tracked Markdown file, with the same `markdownlint-cli` pin as CI. It needs `git`, `markdownlint`, `lychee`, and network access to github.com, and exits 2 with a message naming whatever is missing rather than skipping:
+`tests/e2e.sh` is the heavy tier: markdownlint and a lychee link check over every tracked Markdown file, with the same `markdownlint-cli` pin as CI. It needs `git`, `markdownlint`, `lychee`, and network access to github.com. A missing prerequisite is a failure: it exits 1 with a message naming what is missing:
 
 ```bash
 bash tests/e2e.sh

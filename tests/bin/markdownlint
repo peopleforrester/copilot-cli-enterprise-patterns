@@ -11,7 +11,7 @@ readonly MARKDOWNLINT_CLI_VERSION="0.49.1"
 if ! command -v npx >/dev/null 2>&1; then
     printf 'FAIL: npx not on PATH; markdownlint-cli@%s needs Node.js\n' \
         "${MARKDOWNLINT_CLI_VERSION}" >&2
-    exit 2
+    exit 1
 fi
 
 exec npx --yes --package="markdownlint-cli@${MARKDOWNLINT_CLI_VERSION}" -- markdownlint "$@"

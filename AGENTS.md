@@ -48,3 +48,4 @@ The `preToolUse` and `postToolUse` hooks in `.github/hooks/` enforce steps 1 and
 - **Ask, don't assume.** If a requirement is ambiguous, ask. Do not guess and ship.
 
 Test command: `bash tests/run.sh`
+E2E command: `bash tests/e2e.sh`

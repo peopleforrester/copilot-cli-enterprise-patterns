@@ -7,6 +7,10 @@ set -uo pipefail
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "${REPO_ROOT}" || exit 1
 
+# The pinned shims stand in for global installs, as in tests/run.sh: markdownlint through
+# npx at the CI pin, lychee as a hash-checked release binary.
+export PATH="${REPO_ROOT}/tests/bin:${PATH}"
+
 # Same pins as .github/workflows/ci.yml, so a local pass predicts the CI verdict.
 declare -A install_hint=(
     [git]="install git"

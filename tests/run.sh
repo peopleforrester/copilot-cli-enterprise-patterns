@@ -38,8 +38,8 @@ step() {
 }
 
 lint_shell() {
-    # tests/bin/markdownlint has no .sh suffix (the hook calls it by name), so list it.
-    find scripts tests -name '*.sh' -exec shellcheck tests/bin/markdownlint {} +
+    # The tests/bin shims have no .sh suffix (callers run them by name), so list them.
+    find scripts tests -name '*.sh' -exec shellcheck tests/bin/markdownlint tests/bin/lychee {} +
 }
 
 lint_markdown() {

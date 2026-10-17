@@ -55,14 +55,17 @@ The CI workflow runs:
 
 - `markdownlint` on all `.md` files
 - JSON validation on all `.json` files
+- `shellcheck` on the shell scripts under `scripts/` and `tests/`
+- The hook test suite
 - Link check on all markdown links
 
 Your PR will be blocked if any of these fail. Run them locally first:
 
 ```bash
-markdownlint '**/*.md'
-find . -name '*.json' -not -path '*/node_modules/*' -exec jq empty {} \;
+bash tests/run.sh
 ```
+
+This runs every CI check except the link check, using the same `markdownlint-cli` version and ignore list as CI. It needs `bash`, `jq`, `shellcheck`, `timeout`, and `npx` (Node.js). The link check needs the network, so it lives in a separate tier: `bash tests/e2e.sh`, which also needs `lychee`. See `tests/hooks/README.md` for details.
 
 ## Code of conduct
 

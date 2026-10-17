@@ -8,20 +8,20 @@ Bash-based test harness for the shipped hooks under `scripts/copilot-hooks/`. Th
 bash tests/run.sh
 ```
 
-`tests/run.sh` is the fast tier: it shellchecks `scripts/` and `tests/`, validates every JSON file, and runs each `tests/hooks/test_*.sh`. To run one suite on its own:
+`tests/run.sh` is the fast tier: it shellchecks `scripts/` and `tests/`, runs markdownlint over every `.md` file with CI's ignore list, validates every JSON file, and runs each `tests/hooks/test_*.sh`. It also fails if the local markdownlint version or ignore list drifts from `.github/workflows/ci.yml`. To run one suite on its own:
 
 ```bash
-bash tests/hooks/test_lint_changed.sh
+PATH="$PWD/tests/bin:$PATH" bash tests/hooks/test_lint_changed.sh
 bash tests/hooks/test_run_tests.sh
 ```
 
-Requires `bash`, `jq`, `shellcheck`, and `timeout` (GNU coreutils). Each suite exits 0 on all-pass, 1 on any failure, 2 if a required tool is missing. `tests/run.sh` treats a missing tool as a failure.
+Requires `bash`, `jq`, `shellcheck`, `timeout` (GNU coreutils), and `npx` (Node.js). CI installs `markdownlint-cli` globally; locally `tests/bin/markdownlint` runs the same pinned version through `npx`, which downloads it on first use and caches it after that. Each suite exits 0 on all-pass, 1 on any failure, 2 if a required tool is missing. `tests/run.sh` treats a missing tool as a failure.
 
 ## What's covered
 
 `test_lint_changed.sh` (preToolUse lint hook):
 
-- A clean Markdown file produces no `"deny"` output.
+- A clean Markdown file produces no `"deny"` output; one with a markdownlint error is denied.
 - A syntactically broken JSON file produces `"deny": true` on stdout.
 - An event with no path is approved (nothing to lint).
 - An event referencing a non-existent file is approved (new-file branch).
